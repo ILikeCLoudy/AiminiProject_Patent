@@ -130,10 +130,11 @@
 
 
 ## Architecture
-(그래프 이미지)
+<img width="2158" height="4990" alt="Untitled diagram-2025-10-21-080034" src="https://github.com/user-attachments/assets/be89e496-5b56-40ed-991a-9a795ee3a127" />
 
 
 ## Directory Structure
+```
 ├── data/                      # 원시/정제 메타데이터(JSON/Parquet)
 ├── agents/                    # 에이전트 모듈 (search, summarize, score, report ...)
 ├── prompts/                   # 프롬프트 템플릿
@@ -143,7 +144,7 @@
 ├── app.py                     # 엔드투엔드 실행 스크립트(CLI)
 ├── README.md
 └── requirements.txt
-
+```
 
 ## Contributors 
 - 이정엽 : 기술 특허 평가 Agent 설계 및 구축, Context 엔지니어링
