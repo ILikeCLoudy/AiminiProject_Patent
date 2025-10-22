@@ -109,7 +109,7 @@
 | Data  | pandas, numpy, scikit-learn        |
 
 ## Agents
- 
+- Master Agent: Edge AI / On-device 관련 기술 특허 검색 Agent
 - Patent-Search Agent: 키워드/CPC/기간 기반 수집, 패밀리 병합·중복 제거·비관련 필터
 - Summarizer Agent: 초록/청구항에서 문제–해결–효과 3문장 요약 + 근거 스니펫
 - Core-Scoring Agent: 코호트 퍼센타일 정규화→5점화, 코어 지표(A1~A6) 산출
