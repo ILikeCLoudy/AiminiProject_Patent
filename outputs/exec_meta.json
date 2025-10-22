@@ -1,0 +1,71 @@
+{
+  "source_badges": {
+    "legal": "Manual",
+    "family": "Manual",
+    "foreign": "Manual",
+    "renewal": "Manual",
+    "std": "Manual",
+    "trl": "Local RAG",
+    "claims": "Local RAG"
+  },
+  "cache_ttl_days": 30,
+  "weights": "use_default",
+  "seed": 42,
+  "logs": [
+    "WO2018097365A1: fallback parser used, claims=3",
+    "SWTRLs: fallback parser used, claims=0",
+    "Ingestion completed: embedded=0, skipped=7",
+    "INGEST: embedded=0 skipped=7",
+    "REPORT generated at reports\\report_20251022163334089478.txt"
+  ],
+  "warnings": [],
+  "ts": "2025-10-22T16:33:34.089478",
+  "version": "v0",
+  "fingerprints": {
+    "WO2018097365A1": {
+      "fingerprint": "bf00c88ba0fde57dcfe43606ee3d63b486dc20c9d6cf02de09c3d65e0e7b3e14",
+      "parser": "fallback",
+      "pages": 0,
+      "claims": 3
+    },
+    "SWTRLs": {
+      "fingerprint": "9d01eb96b4a8d5508be2a9a0bb8604020318a27ca754785d3b4ff2953df68615",
+      "parser": "fallback",
+      "pages": 0,
+      "claims": 0
+    }
+  },
+  "ingestion": {
+    "last_result": {
+      "documents": [
+        {
+          "doc_id": "WO2018097365A1",
+          "collection": "patents",
+          "count": 0,
+          "skipped": 5
+        },
+        {
+          "doc_id": "SWTRLs",
+          "collection": "trl_ref",
+          "count": 0,
+          "skipped": 2
+        }
+      ],
+      "counts": {
+        "WO2018097365A1": 0,
+        "SWTRLs": 0
+      },
+      "embedded": 0,
+      "skipped": 7
+    }
+  },
+  "retrieval": {
+    "alpha": 0.6,
+    "trl_k_per_query": 6,
+    "max_snippets_per_metric": 3,
+    "trl_snippets": 3,
+    "trl_ref_snippets": 2,
+    "claims_k_per_query": 6,
+    "claims_snippets": 3
+  }
+}

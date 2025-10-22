@@ -1,0 +1,62 @@
+{
+  "keywords": ["on-device", "edge ai", "federated learning", "quantization"],
+  "cpc": ["G06N", "G06F"],
+  "period": {"from": "2022-01-01", "to": "2025-12-31"},
+  "edge_thresholds": {"latency_ms": 50, "power_mw": 600, "memory_mb": 256},
+
+  "orchestrator": "langgraph",
+  "planner_llm": "gpt-4o-mini",
+
+  "embedding_backend": "openai",
+  "openai_model": "text-embedding-3-small",
+  "openai_timeout_s": 30,
+  "embedding_token_cap_per_run": 25000,
+
+  "vector_backend": "chroma",
+  "persist_dir": "cache/chroma",
+  "collection_name": "patents",
+
+  "weights": "use_default",
+  "cutoffs": {"topk": 10, "summary_len": 3},
+  "seed": 42,
+
+  "k_per_query": 6,
+  "max_snippets_per_metric": 3,
+  "max_snippet_chars": 900,
+  "cache_ttl_days": 30,
+  "retrieval_alpha": 0.6,
+
+  "api": {
+    "enabled": true,
+    "mock": false,
+    "max_calls_per_run": 200,
+    "batch_size": 20,
+    "retry": {"max_attempts": 3, "backoff_s": 2},
+    "whitelist_domains": ["uspto.gov", "epo.org", "wipo.int", "etsi.org"]
+  },
+
+  "tavily": {
+    "enabled": false,
+    "api_key_env": "TAVILY_API_KEY",
+    "max_queries_per_run": 5,
+    "timeout_s": 20,
+    "cache_ttl_days": 30,
+    "whitelist_domains": ["etsi.org", "uspto.gov", "wipo.int", "epo.org"],
+    "snapshot_dir": "data/snapshots",
+    "max_snapshots": 3
+  },
+
+  "source_mapping": {
+    "trl": "Local RAG (PDF/API snapshot → local embed)",
+    "claims": "Local RAG (independent-claims windows → local embed)",
+    "citations": "API meta (no embed)",
+    "family": "API meta (no embed)",
+    "countries": "API meta (no embed)",
+    "legal_status": "API meta (no embed)",
+    "renewal": "API meta (no embed)",
+    "std_sep": "API meta (no embed; clause needs snapshot if quoted)",
+    "hhi": "API meta (calculated)",
+    "generality": "API meta (calculated)",
+    "originality": "API meta (calculated)"
+  }
+}

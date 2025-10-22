@@ -1,0 +1,308 @@
+{
+  "config": {
+    "weights": "use_default",
+    "seed": 42,
+    "cache_ttl_days": 30,
+    "max_snippets_per_metric": 3,
+    "k_per_query": 6,
+    "retrieval_alpha": 0.6,
+    "persist_dir": "cache/chroma"
+  },
+  "inputs": {
+    "pdfs": [
+      "data\\pdfs\\WO2018097365A1.pdf",
+      "data\\pdfs\\SWTRLs.pdf"
+    ],
+    "metas": [
+      {
+        "doc_id": "WO2018097365A1",
+        "title": "...",
+        "publication_date": "2018-05-31",
+        "legal_status": "published",
+        "renewal_years": 0,
+        "family_size": 1,
+        "countries": [
+          "WO"
+        ],
+        "forward_citations_5y": 0,
+        "foreign_oriented": true,
+        "sep_declared": false,
+        "std_participation": false,
+        "notes": "Claims  . comprising/wherein  ."
+      },
+      {
+        "doc_id": "SWTRLs",
+        "title": "Applying TRLs to Software",
+        "publication_date": "2010-01-01",
+        "notes": "Ʈ TRL /. ref ε."
+      }
+    ]
+  },
+  "index": {
+    "patents_index": "patents",
+    "trl_ref_index": "trl_ref"
+  },
+  "evidence": {
+    "trl": {
+      "level": 7.0,
+      "snippets": [
+        {
+          "id": "sec:WO2018097365A1-abstract:0",
+          "text": "An on-device inference apparatus is described, transitioning a prototype into a pilot deployment with real-time quantized processing for edge AI scenarios.",
+          "meta": {
+            "section": "abstract",
+            "len_chars": 155,
+            "doc_id": "WO2018097365A1",
+            "source_path": "data\\pdfs\\WO2018097365A1.pdf",
+            "fingerprint": "bf00c88ba0fde57dcfe43606ee3d63b486dc20c9d6cf02de09c3d65e0e7b3e14"
+          },
+          "score": 0.8158484461094011,
+          "bm25": 1.0,
+          "embedding": 0.5396211152735028,
+          "cue": "pilot"
+        },
+        {
+          "id": "sec:WO2018097365A1-description:0",
+          "text": "The disclosed system deploys a compact neural accelerator within wearable and IoT devices. Field tests and relevant environment evaluations demonstrate operational reliability in production-like conditions. The architecture emphasises secure model updates, adaptive quantisation, and low-latency inference tailored for on-device execution.",
+          "meta": {
+            "section": "description",
+            "len_chars": 339,
+            "doc_id": "WO2018097365A1",
+            "source_path": "data\\pdfs\\WO2018097365A1.pdf",
+            "fingerprint": "bf00c88ba0fde57dcfe43606ee3d63b486dc20c9d6cf02de09c3d65e0e7b3e14"
+          },
+          "score": 0.8107979473517044,
+          "bm25": 1.0,
+          "embedding": 0.5269948683792609,
+          "cue": "production"
+        },
+        {
+          "id": "claim:WO2018097365A1-1:0",
+          "text": "A device comprising an on-device processor configured to execute a quantized neural network in real-time within an operational environment, the device including telemetry for prototype to pilot upgrades, adaptive calibration pipelines, secure enclave management, federated aggregation buffers, and a plurality of edge accelerators coordinated by a policy engine that maintains latency thresholds below ten milliseconds while preserving power budgets across mission profiles. The device further comprises memory partitions, compression controllers, wireless radios, fallbacks for disconnected operation, proactive failure detection routines, and orchestrated deployment hooks that enable continuous integration of model updates validated through field trials, pilot deployments, and production readine",
+          "meta": {
+            "section": "claims",
+            "claim_id": 1,
+            "independent": true,
+            "doc_id": "WO2018097365A1",
+            "len_chars": 800,
+            "source_path": "data\\pdfs\\WO2018097365A1.pdf",
+            "fingerprint": "bf00c88ba0fde57dcfe43606ee3d63b486dc20c9d6cf02de09c3d65e0e7b3e14"
+          },
+          "score": 0.7052461126952848,
+          "bm25": 0.8419822802064064,
+          "embedding": 0.5001418614286023,
+          "cue": "pilot"
+        }
+      ],
+      "ref_snippets": [
+        {
+          "id": "sec:SWTRLs-examples:0",
+          "text": "Example progression: prototype -> pilot -> field test -> deployed production services.",
+          "meta": {
+            "section": "examples",
+            "len_chars": 86,
+            "doc_id": "SWTRLs",
+            "source_path": "data\\pdfs\\SWTRLs.pdf",
+            "fingerprint": "9d01eb96b4a8d5508be2a9a0bb8604020318a27ca754785d3b4ff2953df68615"
+          },
+          "score": 0.22248598894880303,
+          "bm25": 0.0,
+          "embedding": 0.5562149723720076
+        },
+        {
+          "id": "sec:SWTRLs-sw_trl:0",
+          "text": "TRL 5 corresponds to validating a software prototype in a relevant environment. TRL 6 and TRL 7 involve field test pilots with partially deployed systems. TRL 8 and TRL 9 indicate production-ready and fully deployed software in an operational environment.",
+          "meta": {
+            "section": "sw_trl",
+            "len_chars": 255,
+            "doc_id": "SWTRLs",
+            "source_path": "data\\pdfs\\SWTRLs.pdf",
+            "fingerprint": "9d01eb96b4a8d5508be2a9a0bb8604020318a27ca754785d3b4ff2953df68615"
+          },
+          "score": 0.2203617536117994,
+          "bm25": 0.0,
+          "embedding": 0.5509043840294985
+        }
+      ],
+      "source_badge": "Local RAG"
+    },
+    "claims": {
+      "num_independent": 1,
+      "avg_len_tokens": 177.0,
+      "pattern_stats": {
+        "comprising": 1,
+        "wherein": 2,
+        "at least one": 1,
+        "configured to": 2
+      },
+      "snippets": [
+        {
+          "id": "claim:WO2018097365A1-2:0",
+          "text": "The device of claim 1 wherein the processor is configured to execute federated updates on-device, dynamically batching encrypted gradients, reconciling conflict resolution policies, and orchestrating synchronization checkpoints. The device of claim 2 wherein the memory subsystem provides at least one secure enclave with attestation pipelines, redundancy failover, and audit telemetry forwarding pathways.",
+          "meta": {
+            "section": "claims",
+            "claim_id": [
+              2,
+              3
+            ],
+            "independent": false,
+            "doc_id": "WO2018097365A1",
+            "len_chars": 406,
+            "source_path": "data\\pdfs\\WO2018097365A1.pdf",
+            "fingerprint": "bf00c88ba0fde57dcfe43606ee3d63b486dc20c9d6cf02de09c3d65e0e7b3e14"
+          },
+          "score": 0.8323501210131079,
+          "bm25": 1.0,
+          "embedding": 0.5808753025327698,
+          "cue": "wherein"
+        },
+        {
+          "id": "claim:WO2018097365A1-1:0",
+          "text": "A device comprising an on-device processor configured to execute a quantized neural network in real-time within an operational environment, the device including telemetry for prototype to pilot upgrades, adaptive calibration pipelines, secure enclave management, federated aggregation buffers, and a plurality of edge accelerators coordinated by a policy engine that maintains latency thresholds below ten milliseconds while preserving power budgets across mission profiles. The device further comprises memory partitions, compression controllers, wireless radios, fallbacks for disconnected operation, proactive failure detection routines, and orchestrated deployment hooks that enable continuous integration of model updates validated through field trials, pilot deployments, and production readine",
+          "meta": {
+            "section": "claims",
+            "claim_id": 1,
+            "independent": true,
+            "doc_id": "WO2018097365A1",
+            "len_chars": 800,
+            "source_path": "data\\pdfs\\WO2018097365A1.pdf",
+            "fingerprint": "bf00c88ba0fde57dcfe43606ee3d63b486dc20c9d6cf02de09c3d65e0e7b3e14"
+          },
+          "score": 0.8090244015276048,
+          "bm25": 1.0,
+          "embedding": 0.5225610038190119,
+          "cue": "comprising"
+        },
+        {
+          "id": "claim:WO2018097365A1-1:1",
+          "text": "ough field trials, pilot deployments, and production readiness reviews. The method maintains audit trails, publishes lifecycle manifests, simulates contingencies, verifies redundancy alignments, validates firmware integrity, orchestrates predictive maintenance cycles, coordinates cooperative inference, documents verification artefacts for regulatory certification bodies across multiple jurisdictions, distributes feature extraction workloads across heterogeneous accelerators, harmonizes containerized workloads, balances exploratory learning agendas, audits time-synchronized logs, exports structured compliance reports, administers anomaly remediation workflows, and keeps redundant control planes warm for instant authority transfer.",
+          "meta": {
+            "section": "claims",
+            "claim_id": 1,
+            "independent": true,
+            "doc_id": "WO2018097365A1",
+            "len_chars": 739,
+            "source_path": "data\\pdfs\\WO2018097365A1.pdf",
+            "fingerprint": "bf00c88ba0fde57dcfe43606ee3d63b486dc20c9d6cf02de09c3d65e0e7b3e14"
+          },
+          "score": 0.22099854041401792,
+          "bm25": 0.0,
+          "embedding": 0.5524963510350448,
+          "cue": "configured to"
+        }
+      ],
+      "source_badge": "Local RAG"
+    }
+  },
+  "scores": {
+    "trl": 70.0,
+    "claim": 85.0,
+    "legal": 55.0,
+    "family": 50.0,
+    "foreign": 80.0,
+    "renewal": 40.0,
+    "std": 35.0,
+    "fto": 0.0
+  },
+  "decision": {
+    "total": 66.57894736842104,
+    "label": "M",
+    "flags": [],
+    "report_path": "reports\\report_20251022163334089478.txt"
+  },
+  "exec_meta": {
+    "source_badges": {
+      "legal": "Manual",
+      "family": "Manual",
+      "foreign": "Manual",
+      "renewal": "Manual",
+      "std": "Manual",
+      "trl": "Local RAG",
+      "claims": "Local RAG"
+    },
+    "cache_ttl_days": 30,
+    "weights": "use_default",
+    "seed": 42,
+    "logs": [
+      "WO2018097365A1: fallback parser used, claims=3",
+      "SWTRLs: fallback parser used, claims=0",
+      "Ingestion completed: embedded=0, skipped=7",
+      "INGEST: embedded=0 skipped=7",
+      "REPORT generated at reports\\report_20251022163334089478.txt"
+    ],
+    "warnings": [],
+    "ts": "2025-10-22T16:33:34.089478",
+    "version": "v0",
+    "fingerprints": {
+      "WO2018097365A1": {
+        "fingerprint": "bf00c88ba0fde57dcfe43606ee3d63b486dc20c9d6cf02de09c3d65e0e7b3e14",
+        "parser": "fallback",
+        "pages": 0,
+        "claims": 3
+      },
+      "SWTRLs": {
+        "fingerprint": "9d01eb96b4a8d5508be2a9a0bb8604020318a27ca754785d3b4ff2953df68615",
+        "parser": "fallback",
+        "pages": 0,
+        "claims": 0
+      }
+    },
+    "ingestion": {
+      "last_result": {
+        "documents": [
+          {
+            "doc_id": "WO2018097365A1",
+            "collection": "patents",
+            "count": 0,
+            "skipped": 5
+          },
+          {
+            "doc_id": "SWTRLs",
+            "collection": "trl_ref",
+            "count": 0,
+            "skipped": 2
+          }
+        ],
+        "counts": {
+          "WO2018097365A1": 0,
+          "SWTRLs": 0
+        },
+        "embedded": 0,
+        "skipped": 7
+      }
+    },
+    "retrieval": {
+      "alpha": 0.6,
+      "trl_k_per_query": 6,
+      "max_snippets_per_metric": 3,
+      "trl_snippets": 3,
+      "trl_ref_snippets": 2,
+      "claims_k_per_query": 6,
+      "claims_snippets": 3
+    }
+  },
+  "metrics": {
+    "ingestion": {
+      "documents": [
+        {
+          "doc_id": "WO2018097365A1",
+          "collection": "patents",
+          "count": 0,
+          "skipped": 5
+        },
+        {
+          "doc_id": "SWTRLs",
+          "collection": "trl_ref",
+          "count": 0,
+          "skipped": 2
+        }
+      ],
+      "counts": {
+        "WO2018097365A1": 0,
+        "SWTRLs": 0
+      },
+      "embedded": 0,
+      "skipped": 7
+    }
+  }
+}
