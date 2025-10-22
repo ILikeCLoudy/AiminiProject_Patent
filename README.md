@@ -130,7 +130,8 @@
 
 
 ## Architecture
-<img width="2158" height="4990" alt="Untitled diagram-2025-10-21-080034" src="https://github.com/user-attachments/assets/be89e496-5b56-40ed-991a-9a795ee3a127" />
+<img width="1511" height="3618" alt="image" src="https://github.com/user-attachments/assets/86823dde-1a66-4b0b-88f8-f0eb64075092" />
+
 
 
 ## Directory Structure
