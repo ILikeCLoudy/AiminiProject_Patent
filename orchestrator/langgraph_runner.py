@@ -272,6 +272,30 @@ def _score_node(state: Dict[str, Any]) -> Dict[str, Any]:
     return state
 
 
+def _build_risk_list(decision: Dict[str, Any], missing_keys: List[str], ok_metrics: int, total_metrics: int) -> List[Dict[str, str]]:
+    """Build unique risk list avoiding duplicates."""
+    risks: List[Dict[str, str]] = []
+    flags = decision.get("flags", [])
+
+    # Add FTO risk if present
+    if "FTO_risk" in flags:
+        risks.append({"item": "FTO 리스크", "impact": "출시 전 법률 검토 필수"})
+
+    # Add data gap risk if missing keys exist
+    if missing_keys:
+        risks.append({"item": f"데이터 결측 ({len(missing_keys)}개 지표)", "impact": f"전체 {total_metrics}개 중 {ok_metrics}개만 확보"})
+
+    # Add standard risk if no SEP or std info
+    if not any("std" in flag.lower() or "sep" in flag.lower() for flag in flags) and not missing_keys:
+        risks.append({"item": "표준 연계 미확인", "impact": "SEP 선언 여부 추가 검증 필요"})
+
+    # If no risks identified, add generic note
+    if not risks:
+        risks.append({"item": "일반 리스크", "impact": "지속적인 모니터링 권장"})
+
+    return risks
+
+
 def _report_node(state: Dict[str, Any]) -> Dict[str, Any]:
     exec_meta = state.setdefault("exec_meta", {})
     decision = state.setdefault("decision", {})
@@ -310,20 +334,42 @@ def _report_node(state: Dict[str, Any]) -> Dict[str, Any]:
     routing_priority = state.get("routing", {}).get("priority", "N/A")
     performance_metrics = state.get("performance", {}).get("metrics", {})
 
-    conclusion = f"Label {label}: TRL {trl_score or 'N/A'} / Claim {claim_score or 'N/A'}"
+    # Get patent information
+    metas = state.get("inputs", {}).get("metas", [])
+    primary_meta = metas[0] if metas else {}
+    patent_title = primary_meta.get("title", "Unknown Patent")
+    patent_doc_id = primary_meta.get("doc_id", "Unknown")
+
+    # Build conclusion with total score first
+    conclusion = f"Total Score {score_total:.2f} → Label {label}"
     core_reasons: List[str] = []
     if trl_score is not None:
-        core_reasons.append(f"TRL readiness score {trl_score:.1f}")
+        core_reasons.append(f"TRL readiness {trl_score:.1f}")
     if claim_score is not None:
-        core_reasons.append(f"Claim breadth score {claim_score:.1f}")
+        core_reasons.append(f"Claim breadth {claim_score:.1f}")
     if not core_reasons:
         core_reasons.append("근거 스니펫 부족")
 
+    # Get LLM context
+    synthesis = state.get("synthesis", {})
+    pse_summary = synthesis.get("ps_e_summary", "")
+
     summary_card = {
+        "patent_info": {
+            "doc_id": patent_doc_id,
+            "title": patent_title,
+        },
+        "llm_context": {
+            "query": f"Analyze {patent_doc_id} for Edge AI deployment readiness",
+            "evidence_summary": pse_summary[:200] + "..." if len(pse_summary) > 200 else pse_summary,
+            "trl_snippets": len(state.get("evidence", {}).get("trl", {}).get("snippets", [])),
+            "claim_snippets": len(state.get("evidence", {}).get("claims", {}).get("snippets", [])),
+            "api_metrics": f"{ok_metrics}/{total_metrics}",
+        },
         "conclusion": conclusion,
         "reasons": core_reasons[:2],
         "purpose_scope": {
-            "purpose": "Edge AI 특허 기술성·시장성 평가",
+            "purpose": f"{patent_doc_id} - {patent_title}의 기술성·시장성 평가",
             "scope": {
                 "keywords": keywords,
                 "cpc": cpc_codes,
@@ -342,10 +388,7 @@ def _report_node(state: Dict[str, Any]) -> Dict[str, Any]:
             {"action": "표준 연계 확인", "owner": "표준화 팀", "due": "+14d", "note": "SEP 선언 여부 검증"},
             {"action": "데이터 보완", "owner": "AI 전략팀", "due": "+21d", "note": f"결측 지표 {len(missing_keys)}개 채우기"},
         ],
-        "risks": [
-            {"item": "FTO_risk" if "FTO_risk" in decision.get("flags", []) else "데이터 결측", "impact": "출시 전 법률/데이터 보강 필요"},
-            {"item": "데이터 결측" if missing_keys else "표준 연계 미확인", "impact": f"{ok_metrics}/{total_metrics} 지표만 확보"},
-        ],
+        "risks": _build_risk_list(decision, missing_keys, ok_metrics, total_metrics),
         "trust_meta": {
             "contribution": decision.get("weights_meta", {}).get("contributions", {}),
             "missing_ratio": missing_ratio,

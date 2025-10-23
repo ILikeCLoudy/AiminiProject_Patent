@@ -186,8 +186,8 @@
           "doc_ref": "data\\pdfs\\SWTRLs.pdf",
           "text_checksum": "sha256:db4c701b98ab604aa77c96ce33dd350ca9ce1957bebac99545319a613cde2087",
           "offsets": {},
-          "retrieval_ts": "2025-10-23T13:27:04.501137+09:00",
-          "fetch_ts": "2025-10-23T13:27:04.501137+09:00",
+          "retrieval_ts": "2025-10-23T13:47:38.097109+09:00",
+          "fetch_ts": "2025-10-23T13:47:38.097109+09:00",
           "cache_info": {
             "hit": false
           },
@@ -212,8 +212,8 @@
           "doc_ref": "data\\pdfs\\SWTRLs.pdf",
           "text_checksum": "sha256:4677364988c632c49efae8c0dd6bc5151168d438631309514cf9acd1d3e3665c",
           "offsets": {},
-          "retrieval_ts": "2025-10-23T13:27:04.501137+09:00",
-          "fetch_ts": "2025-10-23T13:27:04.501137+09:00",
+          "retrieval_ts": "2025-10-23T13:47:38.097109+09:00",
+          "fetch_ts": "2025-10-23T13:47:38.097109+09:00",
           "cache_info": {
             "hit": false
           },
@@ -240,8 +240,8 @@
           "doc_ref": "data\\pdfs\\SWTRLs.pdf",
           "text_checksum": "sha256:4677364988c632c49efae8c0dd6bc5151168d438631309514cf9acd1d3e3665c",
           "offsets": {},
-          "retrieval_ts": "2025-10-23T13:27:04.501137+09:00",
-          "fetch_ts": "2025-10-23T13:27:04.501137+09:00",
+          "retrieval_ts": "2025-10-23T13:47:38.097109+09:00",
+          "fetch_ts": "2025-10-23T13:47:38.097109+09:00",
           "cache_info": {
             "hit": false
           },
@@ -282,7 +282,7 @@
           "source_type": "API",
           "source_id": "NBER-W7741",
           "source_url": "https://www.nber.org/papers/w7741",
-          "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+          "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": false
           },
@@ -301,7 +301,7 @@
           "source_type": "API",
           "source_id": "GOOGLE-PATENTS",
           "source_url": "https://patents.google.com/patent/US20230012345",
-          "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+          "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": false
           },
@@ -320,7 +320,7 @@
           "source_type": "API",
           "source_id": "WIPO-2024",
           "source_url": "https://www.wipo.int/web-publications/world-intellectual-property-indicators-2024-highlights/en/patents-highlights.html",
-          "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+          "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": false
           },
@@ -339,7 +339,7 @@
           "source_type": "API",
           "source_id": "WIPO-2024",
           "source_url": "https://www.wipo.int/web-publications/world-intellectual-property-indicators-2024-highlights/en/patents-highlights.html",
-          "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+          "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": false
           },
@@ -358,7 +358,7 @@
           "source_type": "API",
           "source_id": "USPTO-OG-2012-52",
           "source_url": "https://www.uspto.gov/web/offices/com/sol/og/2012/week52/TOCCN/item-80.htm",
-          "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+          "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": false
           },
@@ -377,7 +377,7 @@
           "source_type": "API",
           "source_id": "WIPO-FTO-ARTICLE",
           "source_url": "https://www.wipo.int/en/web/wipo-magazine/articles/ip-and-business-launching-a-new-product-freedom-to-operate-34956",
-          "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+          "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": false
           },
@@ -396,7 +396,7 @@
           "source_type": "API",
           "source_id": "USPTO-FEE",
           "source_url": "https://www.uspto.gov/web/offices/com/sol/og/2012/week52/TOCCN/item-80.htm",
-          "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+          "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": false
           },
@@ -415,7 +415,7 @@
           "source_type": "API",
           "source_id": "ETSI-SR-000-314",
           "source_url": "https://www.etsi.org/deliver/etsi_sr/000300_000399/000314/02.32.01_60/sr_000314v023201p.pdf",
-          "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+          "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": false
           },
@@ -434,7 +434,7 @@
           "source_type": "API",
           "source_id": "DOJ-HHI",
           "source_url": "https://www.justice.gov/atr/herfindahl-hirschman-index",
-          "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+          "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": false
           },
@@ -453,7 +453,7 @@
           "source_type": "API",
           "source_id": "NBER-W8498",
           "source_url": "https://www.nber.org/papers/w8498",
-          "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+          "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": false
           },
@@ -472,7 +472,7 @@
           "source_type": "API",
           "source_id": "NBER-W7741",
           "source_url": "https://www.nber.org/papers/w7741",
-          "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+          "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": false
           },
@@ -491,7 +491,7 @@
           "source_type": "API",
           "source_id": "GOOGLE-PATENTS",
           "source_url": "https://patents.google.com/patent/US20230012345",
-          "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+          "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": false
           },
@@ -578,7 +578,7 @@
       "fto_penalty": 0.0
     },
     "weights_redistributed": true,
-    "report_path": "reports\\report_202510231327045011370900.pdf"
+    "report_path": "reports\\report_202510231347380971090900.pdf"
   },
   "exec_meta": {
     "source_badges": {
@@ -600,18 +600,18 @@
       "backend": "openai",
       "model": "text-embedding-3-small",
       "timeout_s": 30,
-      "snippets": 0,
-      "tokens_est": 0,
+      "snippets": 7,
+      "tokens_est": 342,
       "cap": 25000,
-      "embedded": 0,
-      "skipped": 7
+      "embedded": 7,
+      "skipped": 0
     },
     "openai_api_key_env": "OPENAI_API_KEY",
     "logs": [
       "WO2018097365A1: fallback parser used, claims=3",
       "SWTRLs: fallback parser used, claims=0",
-      "Ingestion completed: embedded=0, skipped=12",
-      "INGEST: embedded=0 skipped=12",
+      "Ingestion completed: embedded=7, skipped=0",
+      "INGEST: embedded=7 skipped=0",
       "API_EXPAND: calls=1 cached=0 batches=1 ok=5/10 missing=COUNTRIES,GENERALITY,HHI,LITIGATION_FLAG,ORIGINALITY reason=ok",
       "TRL: evidence gathered",
       "CLAIMS: evidence gathered",
@@ -622,7 +622,7 @@
       "SCORE: Evaluated edge suitability via EdgeAdapterAgent",
       "SCORE: Aggregated scores via AggregatorAgent",
       "SCORE: total=74.09 label=P",
-      "REPORT: generated at reports\\report_202510231327045011370900.pdf",
+      "REPORT: generated at reports\\report_202510231347380971090900.pdf",
       "Pipeline execution completed."
     ],
     "warnings": [
@@ -638,7 +638,7 @@
       "SCORE",
       "REPORT"
     ],
-    "ts": "2025-10-23T13:27:04.501137+09:00",
+    "ts": "2025-10-23T13:47:38.097109+09:00",
     "version": "v0",
     "fingerprints": {
       "WO2018097365A1": {
@@ -665,22 +665,22 @@
           {
             "doc_id": "WO2018097365A1",
             "collection": "patents",
-            "count": 0,
-            "skipped": 5
+            "count": 5,
+            "skipped": 0
           },
           {
             "doc_id": "SWTRLs",
             "collection": "trl_ref",
-            "count": 0,
-            "skipped": 7
+            "count": 2,
+            "skipped": 0
           }
         ],
         "counts": {
-          "WO2018097365A1": 0,
-          "SWTRLs": 0
+          "WO2018097365A1": 5,
+          "SWTRLs": 2
         },
-        "embedded": 0,
-        "skipped": 12
+        "embedded": 7,
+        "skipped": 0
       }
     },
     "completed_nodes": [
@@ -700,7 +700,7 @@
       "crawled_patents": [
         {
           "doc_id": "US20230012345",
-          "timestamp": "2025-10-23T13:27:05.918627",
+          "timestamp": "2025-10-23T13:47:39.638559",
           "source": "google_patents"
         }
       ],
@@ -708,7 +708,7 @@
       "crawler_source": "google_patents",
       "calls": 1,
       "batches": 1,
-      "last_fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+      "last_fetch_ts": "2025-10-23T04:47:38.512152+00:00",
       "missing_keys": [
         "COUNTRIES",
         "GENERALITY",
@@ -763,7 +763,7 @@
             "source_type": "API",
             "source_id": "NBER-W7741",
             "source_url": "https://www.nber.org/papers/w7741",
-            "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+            "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
             "cache_info": {
               "hit": false
             },
@@ -782,7 +782,7 @@
             "source_type": "API",
             "source_id": "GOOGLE-PATENTS",
             "source_url": "https://patents.google.com/patent/US20230012345",
-            "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+            "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
             "cache_info": {
               "hit": false
             },
@@ -801,7 +801,7 @@
             "source_type": "API",
             "source_id": "WIPO-2024",
             "source_url": "https://www.wipo.int/web-publications/world-intellectual-property-indicators-2024-highlights/en/patents-highlights.html",
-            "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+            "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
             "cache_info": {
               "hit": false
             },
@@ -820,7 +820,7 @@
             "source_type": "API",
             "source_id": "WIPO-2024",
             "source_url": "https://www.wipo.int/web-publications/world-intellectual-property-indicators-2024-highlights/en/patents-highlights.html",
-            "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+            "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
             "cache_info": {
               "hit": false
             },
@@ -839,7 +839,7 @@
             "source_type": "API",
             "source_id": "USPTO-OG-2012-52",
             "source_url": "https://www.uspto.gov/web/offices/com/sol/og/2012/week52/TOCCN/item-80.htm",
-            "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+            "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
             "cache_info": {
               "hit": false
             },
@@ -858,7 +858,7 @@
             "source_type": "API",
             "source_id": "WIPO-FTO-ARTICLE",
             "source_url": "https://www.wipo.int/en/web/wipo-magazine/articles/ip-and-business-launching-a-new-product-freedom-to-operate-34956",
-            "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+            "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
             "cache_info": {
               "hit": false
             },
@@ -877,7 +877,7 @@
             "source_type": "API",
             "source_id": "USPTO-FEE",
             "source_url": "https://www.uspto.gov/web/offices/com/sol/og/2012/week52/TOCCN/item-80.htm",
-            "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+            "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
             "cache_info": {
               "hit": false
             },
@@ -896,7 +896,7 @@
             "source_type": "API",
             "source_id": "ETSI-SR-000-314",
             "source_url": "https://www.etsi.org/deliver/etsi_sr/000300_000399/000314/02.32.01_60/sr_000314v023201p.pdf",
-            "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+            "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
             "cache_info": {
               "hit": false
             },
@@ -915,7 +915,7 @@
             "source_type": "API",
             "source_id": "DOJ-HHI",
             "source_url": "https://www.justice.gov/atr/herfindahl-hirschman-index",
-            "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+            "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
             "cache_info": {
               "hit": false
             },
@@ -934,7 +934,7 @@
             "source_type": "API",
             "source_id": "NBER-W8498",
             "source_url": "https://www.nber.org/papers/w8498",
-            "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+            "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
             "cache_info": {
               "hit": false
             },
@@ -953,7 +953,7 @@
             "source_type": "API",
             "source_id": "NBER-W7741",
             "source_url": "https://www.nber.org/papers/w7741",
-            "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+            "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
             "cache_info": {
               "hit": false
             },
@@ -972,7 +972,7 @@
             "source_type": "API",
             "source_id": "GOOGLE-PATENTS",
             "source_url": "https://patents.google.com/patent/US20230012345",
-            "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+            "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
             "cache_info": {
               "hit": false
             },
@@ -1015,7 +1015,7 @@
     },
     "report": {
       "completed": true,
-      "path": "reports\\report_202510231327045011370900.pdf"
+      "path": "reports\\report_202510231347380971090900.pdf"
     }
   },
   "metrics": {
@@ -1024,22 +1024,22 @@
         {
           "doc_id": "WO2018097365A1",
           "collection": "patents",
-          "count": 0,
-          "skipped": 5
+          "count": 5,
+          "skipped": 0
         },
         {
           "doc_id": "SWTRLs",
           "collection": "trl_ref",
-          "count": 0,
-          "skipped": 7
+          "count": 2,
+          "skipped": 0
         }
       ],
       "counts": {
-        "WO2018097365A1": 0,
-        "SWTRLs": 0
+        "WO2018097365A1": 5,
+        "SWTRLs": 2
       },
-      "embedded": 0,
-      "skipped": 12
+      "embedded": 7,
+      "skipped": 0
     }
   },
   "api": {
@@ -1053,7 +1053,7 @@
         "source_type": "API",
         "source_id": "NBER-W7741",
         "source_url": "https://www.nber.org/papers/w7741",
-        "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+        "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
         "cache_info": {
           "hit": false
         },
@@ -1072,7 +1072,7 @@
         "source_type": "API",
         "source_id": "GOOGLE-PATENTS",
         "source_url": "https://patents.google.com/patent/US20230012345",
-        "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+        "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
         "cache_info": {
           "hit": false
         },
@@ -1091,7 +1091,7 @@
         "source_type": "API",
         "source_id": "WIPO-2024",
         "source_url": "https://www.wipo.int/web-publications/world-intellectual-property-indicators-2024-highlights/en/patents-highlights.html",
-        "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+        "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
         "cache_info": {
           "hit": false
         },
@@ -1110,7 +1110,7 @@
         "source_type": "API",
         "source_id": "WIPO-2024",
         "source_url": "https://www.wipo.int/web-publications/world-intellectual-property-indicators-2024-highlights/en/patents-highlights.html",
-        "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+        "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
         "cache_info": {
           "hit": false
         },
@@ -1129,7 +1129,7 @@
         "source_type": "API",
         "source_id": "USPTO-OG-2012-52",
         "source_url": "https://www.uspto.gov/web/offices/com/sol/og/2012/week52/TOCCN/item-80.htm",
-        "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+        "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
         "cache_info": {
           "hit": false
         },
@@ -1148,7 +1148,7 @@
         "source_type": "API",
         "source_id": "WIPO-FTO-ARTICLE",
         "source_url": "https://www.wipo.int/en/web/wipo-magazine/articles/ip-and-business-launching-a-new-product-freedom-to-operate-34956",
-        "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+        "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
         "cache_info": {
           "hit": false
         },
@@ -1167,7 +1167,7 @@
         "source_type": "API",
         "source_id": "USPTO-FEE",
         "source_url": "https://www.uspto.gov/web/offices/com/sol/og/2012/week52/TOCCN/item-80.htm",
-        "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+        "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
         "cache_info": {
           "hit": false
         },
@@ -1186,7 +1186,7 @@
         "source_type": "API",
         "source_id": "ETSI-SR-000-314",
         "source_url": "https://www.etsi.org/deliver/etsi_sr/000300_000399/000314/02.32.01_60/sr_000314v023201p.pdf",
-        "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+        "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
         "cache_info": {
           "hit": false
         },
@@ -1205,7 +1205,7 @@
         "source_type": "API",
         "source_id": "DOJ-HHI",
         "source_url": "https://www.justice.gov/atr/herfindahl-hirschman-index",
-        "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+        "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
         "cache_info": {
           "hit": false
         },
@@ -1224,7 +1224,7 @@
         "source_type": "API",
         "source_id": "NBER-W8498",
         "source_url": "https://www.nber.org/papers/w8498",
-        "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+        "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
         "cache_info": {
           "hit": false
         },
@@ -1243,7 +1243,7 @@
         "source_type": "API",
         "source_id": "NBER-W7741",
         "source_url": "https://www.nber.org/papers/w7741",
-        "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+        "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
         "cache_info": {
           "hit": false
         },
@@ -1262,7 +1262,7 @@
         "source_type": "API",
         "source_id": "GOOGLE-PATENTS",
         "source_url": "https://patents.google.com/patent/US20230012345",
-        "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+        "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
         "cache_info": {
           "hit": false
         },
@@ -1299,7 +1299,7 @@
       "calls": 1,
       "cached": 0,
       "batches": 1,
-      "ts": "2025-10-23T13:27:04.501137+09:00",
+      "ts": "2025-10-23T13:47:38.097109+09:00",
       "cache_hits": 0,
       "budget_used_total": 1,
       "meta": {
@@ -1325,7 +1325,7 @@
       "source_type": "API",
       "source_id": "NBER-W7741",
       "source_url": "https://www.nber.org/papers/w7741",
-      "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+      "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
       "cache_info": {
         "hit": false
       },
@@ -1344,7 +1344,7 @@
       "source_type": "API",
       "source_id": "GOOGLE-PATENTS",
       "source_url": "https://patents.google.com/patent/US20230012345",
-      "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+      "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
       "cache_info": {
         "hit": false
       },
@@ -1363,7 +1363,7 @@
       "source_type": "API",
       "source_id": "WIPO-2024",
       "source_url": "https://www.wipo.int/web-publications/world-intellectual-property-indicators-2024-highlights/en/patents-highlights.html",
-      "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+      "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
       "cache_info": {
         "hit": false
       },
@@ -1382,7 +1382,7 @@
       "source_type": "API",
       "source_id": "WIPO-2024",
       "source_url": "https://www.wipo.int/web-publications/world-intellectual-property-indicators-2024-highlights/en/patents-highlights.html",
-      "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+      "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
       "cache_info": {
         "hit": false
       },
@@ -1401,7 +1401,7 @@
       "source_type": "API",
       "source_id": "USPTO-OG-2012-52",
       "source_url": "https://www.uspto.gov/web/offices/com/sol/og/2012/week52/TOCCN/item-80.htm",
-      "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+      "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
       "cache_info": {
         "hit": false
       },
@@ -1420,7 +1420,7 @@
       "source_type": "API",
       "source_id": "WIPO-FTO-ARTICLE",
       "source_url": "https://www.wipo.int/en/web/wipo-magazine/articles/ip-and-business-launching-a-new-product-freedom-to-operate-34956",
-      "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+      "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
       "cache_info": {
         "hit": false
       },
@@ -1439,7 +1439,7 @@
       "source_type": "API",
       "source_id": "USPTO-FEE",
       "source_url": "https://www.uspto.gov/web/offices/com/sol/og/2012/week52/TOCCN/item-80.htm",
-      "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+      "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
       "cache_info": {
         "hit": false
       },
@@ -1458,7 +1458,7 @@
       "source_type": "API",
       "source_id": "ETSI-SR-000-314",
       "source_url": "https://www.etsi.org/deliver/etsi_sr/000300_000399/000314/02.32.01_60/sr_000314v023201p.pdf",
-      "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+      "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
       "cache_info": {
         "hit": false
       },
@@ -1477,7 +1477,7 @@
       "source_type": "API",
       "source_id": "DOJ-HHI",
       "source_url": "https://www.justice.gov/atr/herfindahl-hirschman-index",
-      "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+      "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
       "cache_info": {
         "hit": false
       },
@@ -1496,7 +1496,7 @@
       "source_type": "API",
       "source_id": "NBER-W8498",
       "source_url": "https://www.nber.org/papers/w8498",
-      "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+      "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
       "cache_info": {
         "hit": false
       },
@@ -1515,7 +1515,7 @@
       "source_type": "API",
       "source_id": "NBER-W7741",
       "source_url": "https://www.nber.org/papers/w7741",
-      "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+      "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
       "cache_info": {
         "hit": false
       },
@@ -1534,7 +1534,7 @@
       "source_type": "API",
       "source_id": "GOOGLE-PATENTS",
       "source_url": "https://patents.google.com/patent/US20230012345",
-      "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+      "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
       "cache_info": {
         "hit": false
       },
@@ -1549,7 +1549,7 @@
     "api_metrics": [
       {
         "doc_id": "US20230012345",
-        "timestamp": "2025-10-23T13:27:04.501137+09:00",
+        "timestamp": "2025-10-23T13:47:38.097109+09:00",
         "collected_keys": [
           "AGE_YEARS",
           "CITATIONS_TOTAL",
@@ -1610,7 +1610,7 @@
           "source_type": "API",
           "source_id": "NBER-W7741",
           "source_url": "https://www.nber.org/papers/w7741",
-          "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+          "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": false
           },
@@ -1629,7 +1629,7 @@
           "source_type": "API",
           "source_id": "GOOGLE-PATENTS",
           "source_url": "https://patents.google.com/patent/US20230012345",
-          "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+          "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": false
           },
@@ -1648,7 +1648,7 @@
           "source_type": "API",
           "source_id": "WIPO-2024",
           "source_url": "https://www.wipo.int/web-publications/world-intellectual-property-indicators-2024-highlights/en/patents-highlights.html",
-          "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+          "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": false
           },
@@ -1667,7 +1667,7 @@
           "source_type": "API",
           "source_id": "WIPO-2024",
           "source_url": "https://www.wipo.int/web-publications/world-intellectual-property-indicators-2024-highlights/en/patents-highlights.html",
-          "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+          "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": false
           },
@@ -1686,7 +1686,7 @@
           "source_type": "API",
           "source_id": "USPTO-OG-2012-52",
           "source_url": "https://www.uspto.gov/web/offices/com/sol/og/2012/week52/TOCCN/item-80.htm",
-          "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+          "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": false
           },
@@ -1705,7 +1705,7 @@
           "source_type": "API",
           "source_id": "WIPO-FTO-ARTICLE",
           "source_url": "https://www.wipo.int/en/web/wipo-magazine/articles/ip-and-business-launching-a-new-product-freedom-to-operate-34956",
-          "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+          "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": false
           },
@@ -1724,7 +1724,7 @@
           "source_type": "API",
           "source_id": "USPTO-FEE",
           "source_url": "https://www.uspto.gov/web/offices/com/sol/og/2012/week52/TOCCN/item-80.htm",
-          "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+          "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": false
           },
@@ -1743,7 +1743,7 @@
           "source_type": "API",
           "source_id": "ETSI-SR-000-314",
           "source_url": "https://www.etsi.org/deliver/etsi_sr/000300_000399/000314/02.32.01_60/sr_000314v023201p.pdf",
-          "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+          "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": false
           },
@@ -1762,7 +1762,7 @@
           "source_type": "API",
           "source_id": "DOJ-HHI",
           "source_url": "https://www.justice.gov/atr/herfindahl-hirschman-index",
-          "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+          "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": false
           },
@@ -1781,7 +1781,7 @@
           "source_type": "API",
           "source_id": "NBER-W8498",
           "source_url": "https://www.nber.org/papers/w8498",
-          "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+          "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": false
           },
@@ -1800,7 +1800,7 @@
           "source_type": "API",
           "source_id": "NBER-W7741",
           "source_url": "https://www.nber.org/papers/w7741",
-          "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+          "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": false
           },
@@ -1819,7 +1819,7 @@
           "source_type": "API",
           "source_id": "GOOGLE-PATENTS",
           "source_url": "https://patents.google.com/patent/US20230012345",
-          "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+          "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": false
           },

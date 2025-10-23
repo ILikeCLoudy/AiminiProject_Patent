@@ -1,7 +1,7 @@
 field,value
-conclusion,Label P: TRL 85.0 / Claim 85.0
-reasons,TRL readiness score 85.0 | Claim breadth score 85.0
-purpose,Edge AI 특허 기술성·시장성 평가
+conclusion,Total Score 74.09 → Label P
+reasons,TRL readiness 85.0 | Claim breadth 85.0
+purpose,US20230012345 - Edge AI Accelerator for Wearables의 기술성·시장성 평가
 scope_keywords,"on-device, edge ai, federated learning, quantization"
 scope_cpc,"G06N, G06F"
 scope_period,2022-01-01 ~ 2025-12-31

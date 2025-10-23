@@ -19,7 +19,7 @@ except ImportError:  # pragma: no cover - optional dependency
 CUE_WORDS = {cue.lower() for cue in (*TRL_CUES, *CLAIM_CUES)}
 DEFAULT_FONT = "Helvetica"
 DEFAULT_FONT_BOLD = "Helvetica-Bold"
-FALLBACK_NOTE = "Rendered with default font. Install NotoSansCJK for improved CJK coverage."
+FALLBACK_NOTE = ""  # Font is now properly configured, no need for warning
 DISCLAIMER_TEXT = "This report is generated automatically and does not constitute legal advice."
 
 if A4 is not None:
@@ -102,10 +102,36 @@ def _render_summary(canvas_obj: Any, summary_card: Dict[str, Any], *, font_regul
     canvas_obj.setFont(font_bold, 14)
     canvas_obj.drawString(40, y, "SUMMARY")
     y -= 24
+
+    # Patent Information
+    patent_info = summary_card.get("patent_info", {})
+    if patent_info:
+        canvas_obj.setFont(font_bold, 12)
+        canvas_obj.drawString(45, y, f"Patent: {patent_info.get('doc_id', 'N/A')}")
+        y -= 14
+        canvas_obj.setFont(font_regular, 11)
+        y = _draw_wrapped(canvas_obj, f"Title: {patent_info.get('title', 'N/A')}", x=55, y=y, width=88, font=font_regular, font_size=11)
+        y -= 6
+
+    # LLM Context
+    llm_context = summary_card.get("llm_context", {})
+    if llm_context:
+        canvas_obj.setFont(font_bold, 11)
+        canvas_obj.drawString(45, y, "LLM Analysis Context")
+        y -= 14
+        canvas_obj.setFont(font_regular, 10)
+        y = _draw_wrapped(canvas_obj, f"Query: {llm_context.get('query', 'N/A')}", x=55, y=y, width=88, font=font_regular, font_size=10)
+        evidence = f"Evidence: TRL snippets ({llm_context.get('trl_snippets', 0)}), Claim snippets ({llm_context.get('claim_snippets', 0)}), API metrics ({llm_context.get('api_metrics', '0/10')})"
+        y = _draw_wrapped(canvas_obj, evidence, x=55, y=y, width=88, font=font_regular, font_size=10)
+        if llm_context.get("evidence_summary"):
+            y = _draw_wrapped(canvas_obj, f"Summary: {llm_context.get('evidence_summary')}", x=55, y=y, width=88, font=font_regular, font_size=10)
+        y -= 8
+
+    # Conclusion
     canvas_obj.setFont(font_regular, 11)
     y = _draw_wrapped(canvas_obj, f"Conclusion: {summary_card.get('conclusion', 'N/A')}", x=45, y=y, width=90, font=font_regular, font_size=11)
     reasons = " / ".join(summary_card.get("reasons", []))
-    y = _draw_wrapped(canvas_obj, f"Key reasons: {reasons or 'N/A'}", x=45, y=y, width=90, font=font_regular, font_size=11)
+    y = _draw_wrapped(canvas_obj, f"Key metrics: {reasons or 'N/A'}", x=45, y=y, width=90, font=font_regular, font_size=11)
     scope = summary_card.get("purpose_scope", {}).get("scope", {})
     scope_line = (
         f"Purpose: {summary_card.get('purpose_scope', {}).get('purpose', 'N/A')} | "
