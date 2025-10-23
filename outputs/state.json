@@ -112,10 +112,17 @@
         "wipo.int",
         "epo.org",
         "3gpp.org",
-        "ieee.org"
+        "ieee.org",
+        "arxiv.org",
+        "github.com"
       ],
       "snapshot_dir": "data/snapshots",
       "max_snapshots": 3
+    },
+    "edge_adapter": {
+      "use_tavily": true,
+      "max_benchmark_queries": 2,
+      "max_urls_per_query": 3
     },
     "keywords": [
       "on-device",
@@ -159,14 +166,7 @@
         "foreign_oriented": true,
         "sep_declared": true,
         "std_participation": true,
-        "notes": "Wearable edge AI accelerator with power-saving modes.",
-        "edge_performance": {
-          "latency_ms": 35,
-          "power_mw": 450,
-          "memory_mb": 128,
-          "accuracy_delta": -1.2,
-          "source": "User-provided benchmark data"
-        }
+        "notes": "Wearable edge AI accelerator with power-saving modes. Performance metrics will be extracted via Tavily search."
       },
       {
         "doc_id": "SWTRLs",
@@ -194,8 +194,8 @@
           "doc_ref": "data\\pdfs\\SWTRLs.pdf",
           "text_checksum": "sha256:db4c701b98ab604aa77c96ce33dd350ca9ce1957bebac99545319a613cde2087",
           "offsets": {},
-          "retrieval_ts": "2025-10-23T15:39:14.654678+09:00",
-          "fetch_ts": "2025-10-23T15:39:14.654678+09:00",
+          "retrieval_ts": "2025-10-23T16:01:22.044527+09:00",
+          "fetch_ts": "2025-10-23T16:01:22.044527+09:00",
           "cache_info": {
             "hit": false
           },
@@ -220,8 +220,8 @@
           "doc_ref": "data\\pdfs\\SWTRLs.pdf",
           "text_checksum": "sha256:4677364988c632c49efae8c0dd6bc5151168d438631309514cf9acd1d3e3665c",
           "offsets": {},
-          "retrieval_ts": "2025-10-23T15:39:14.654678+09:00",
-          "fetch_ts": "2025-10-23T15:39:14.654678+09:00",
+          "retrieval_ts": "2025-10-23T16:01:22.044527+09:00",
+          "fetch_ts": "2025-10-23T16:01:22.044527+09:00",
           "cache_info": {
             "hit": false
           },
@@ -248,8 +248,8 @@
           "doc_ref": "data\\pdfs\\SWTRLs.pdf",
           "text_checksum": "sha256:4677364988c632c49efae8c0dd6bc5151168d438631309514cf9acd1d3e3665c",
           "offsets": {},
-          "retrieval_ts": "2025-10-23T15:39:14.654678+09:00",
-          "fetch_ts": "2025-10-23T15:39:14.654678+09:00",
+          "retrieval_ts": "2025-10-23T16:01:22.044527+09:00",
+          "fetch_ts": "2025-10-23T16:01:22.044527+09:00",
           "cache_info": {
             "hit": false
           },
@@ -306,7 +306,7 @@
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": true,
-            "age_s": 6696.539103
+            "age_s": 8024.027863
           },
           "budget_used": 1,
           "retries": 1,
@@ -326,7 +326,7 @@
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": true,
-            "age_s": 6696.539103
+            "age_s": 8024.027863
           },
           "budget_used": 1,
           "retries": 1,
@@ -346,7 +346,7 @@
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": true,
-            "age_s": 6696.539103
+            "age_s": 8024.027863
           },
           "budget_used": 1,
           "retries": 1,
@@ -366,7 +366,7 @@
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": true,
-            "age_s": 6696.539103
+            "age_s": 8024.027863
           },
           "budget_used": 1,
           "retries": 1,
@@ -386,7 +386,7 @@
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": true,
-            "age_s": 6696.539103
+            "age_s": 8024.027863
           },
           "budget_used": 1,
           "retries": 1,
@@ -406,7 +406,7 @@
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": true,
-            "age_s": 6696.539103
+            "age_s": 8024.027863
           },
           "budget_used": 1,
           "retries": 1,
@@ -426,7 +426,7 @@
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": true,
-            "age_s": 6696.539103
+            "age_s": 8024.027863
           },
           "budget_used": 1,
           "retries": 1,
@@ -446,7 +446,7 @@
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": true,
-            "age_s": 6696.539103
+            "age_s": 8024.027863
           },
           "budget_used": 1,
           "retries": 1,
@@ -466,7 +466,7 @@
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": true,
-            "age_s": 6696.539103
+            "age_s": 8024.027863
           },
           "budget_used": 1,
           "retries": 1,
@@ -486,7 +486,7 @@
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": true,
-            "age_s": 6696.539103
+            "age_s": 8024.027863
           },
           "budget_used": 1,
           "retries": 1,
@@ -506,7 +506,7 @@
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": true,
-            "age_s": 6696.539103
+            "age_s": 8024.027863
           },
           "budget_used": 1,
           "retries": 1,
@@ -526,7 +526,7 @@
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": true,
-            "age_s": 6696.539103
+            "age_s": 8024.027863
           },
           "budget_used": 1,
           "retries": 1,
@@ -611,7 +611,7 @@
       "fto_penalty": 0.0
     },
     "weights_redistributed": true,
-    "report_path": "reports\\report_202510231539146546780900.pdf"
+    "report_path": "reports\\report_202510231601220445270900.pdf"
   },
   "exec_meta": {
     "source_badges": {
@@ -633,37 +633,36 @@
       "backend": "openai",
       "model": "text-embedding-3-small",
       "timeout_s": 30,
-      "snippets": 0,
-      "tokens_est": 0,
+      "snippets": 7,
+      "tokens_est": 342,
       "cap": 25000,
-      "embedded": 0,
-      "skipped": 7
+      "embedded": 7,
+      "skipped": 0
     },
     "openai_api_key_env": "OPENAI_API_KEY",
     "logs": [
       "WO2018097365A1: fallback parser used, claims=3",
       "SWTRLs: fallback parser used, claims=0",
-      "Ingestion completed: embedded=0, skipped=12",
-      "INGEST: embedded=0 skipped=12",
+      "Ingestion completed: embedded=7, skipped=0",
+      "INGEST: embedded=7 skipped=0",
       "API_EXPAND: calls=0 cached=1 batches=0 ok=5/10 missing=COUNTRIES,GENERALITY,HHI,LITIGATION_FLAG,ORIGINALITY reason=ok",
       "TRL: LLM tool calling used (confidence=0.70)",
       "TRL: evidence gathered",
       "Claims: LLM tool calling used (confidence=0.70)",
       "CLAIMS: evidence gathered",
-      "Edge: User-provided metadata used",
-      "JOIN: Tavily search returned 0 links",
+      "JOIN: Tavily search returned 1 links",
       "JOIN: Generated LLM-based P-S-E summary",
       "JOIN: merged evidence/API metrics (priority=trl)",
       "SCORE: Applied normalization via CoreScoringAgent",
+      "Edge: LLM inference used for performance estimation",
+      "Edge: No performance data available (N/A)",
       "SCORE: Evaluated edge suitability via EdgeAdapterAgent",
       "SCORE: Aggregated scores via AggregatorAgent",
       "SCORE: total=74.09 label=P",
-      "REPORT: generated at reports\\report_202510231539146546780900.pdf",
+      "REPORT: generated at reports\\report_202510231601220445270900.pdf",
       "Pipeline execution completed."
     ],
-    "warnings": [
-      "tavily-python package not installed."
-    ],
+    "warnings": [],
     "plan": [
       "INGEST",
       "API_EXPAND",
@@ -673,7 +672,7 @@
       "SCORE",
       "REPORT"
     ],
-    "ts": "2025-10-23T15:39:14.654678+09:00",
+    "ts": "2025-10-23T16:01:22.044527+09:00",
     "version": "v0",
     "orchestrator": "langgraph",
     "fingerprints": {
@@ -701,22 +700,22 @@
           {
             "doc_id": "WO2018097365A1",
             "collection": "patents",
-            "count": 0,
-            "skipped": 5
+            "count": 5,
+            "skipped": 0
           },
           {
             "doc_id": "SWTRLs",
             "collection": "trl_ref",
-            "count": 0,
-            "skipped": 7
+            "count": 2,
+            "skipped": 0
           }
         ],
         "counts": {
-          "WO2018097365A1": 0,
-          "SWTRLs": 0
+          "WO2018097365A1": 5,
+          "SWTRLs": 2
         },
-        "embedded": 0,
-        "skipped": 12
+        "embedded": 7,
+        "skipped": 0
       }
     },
     "completed_nodes": [
@@ -727,7 +726,6 @@
       "SUMMARIZE",
       "JOIN",
       "CORE_SCORE",
-      "EDGE_ADAPTER",
       "AGGREGATE",
       "SCORE",
       "REPORT"
@@ -792,7 +790,7 @@
             "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
             "cache_info": {
               "hit": true,
-              "age_s": 6696.539103
+              "age_s": 8024.027863
             },
             "budget_used": 1,
             "retries": 1,
@@ -812,7 +810,7 @@
             "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
             "cache_info": {
               "hit": true,
-              "age_s": 6696.539103
+              "age_s": 8024.027863
             },
             "budget_used": 1,
             "retries": 1,
@@ -832,7 +830,7 @@
             "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
             "cache_info": {
               "hit": true,
-              "age_s": 6696.539103
+              "age_s": 8024.027863
             },
             "budget_used": 1,
             "retries": 1,
@@ -852,7 +850,7 @@
             "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
             "cache_info": {
               "hit": true,
-              "age_s": 6696.539103
+              "age_s": 8024.027863
             },
             "budget_used": 1,
             "retries": 1,
@@ -872,7 +870,7 @@
             "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
             "cache_info": {
               "hit": true,
-              "age_s": 6696.539103
+              "age_s": 8024.027863
             },
             "budget_used": 1,
             "retries": 1,
@@ -892,7 +890,7 @@
             "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
             "cache_info": {
               "hit": true,
-              "age_s": 6696.539103
+              "age_s": 8024.027863
             },
             "budget_used": 1,
             "retries": 1,
@@ -912,7 +910,7 @@
             "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
             "cache_info": {
               "hit": true,
-              "age_s": 6696.539103
+              "age_s": 8024.027863
             },
             "budget_used": 1,
             "retries": 1,
@@ -932,7 +930,7 @@
             "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
             "cache_info": {
               "hit": true,
-              "age_s": 6696.539103
+              "age_s": 8024.027863
             },
             "budget_used": 1,
             "retries": 1,
@@ -952,7 +950,7 @@
             "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
             "cache_info": {
               "hit": true,
-              "age_s": 6696.539103
+              "age_s": 8024.027863
             },
             "budget_used": 1,
             "retries": 1,
@@ -972,7 +970,7 @@
             "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
             "cache_info": {
               "hit": true,
-              "age_s": 6696.539103
+              "age_s": 8024.027863
             },
             "budget_used": 1,
             "retries": 1,
@@ -992,7 +990,7 @@
             "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
             "cache_info": {
               "hit": true,
-              "age_s": 6696.539103
+              "age_s": 8024.027863
             },
             "budget_used": 1,
             "retries": 1,
@@ -1012,7 +1010,7 @@
             "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
             "cache_info": {
               "hit": true,
-              "age_s": 6696.539103
+              "age_s": 8024.027863
             },
             "budget_used": 1,
             "retries": 1,
@@ -1028,34 +1026,60 @@
           "LITIGATION_FLAG",
           "ORIGINALITY"
         ],
-        "performance": {
-          "latency_ms": {
-            "value": 35,
-            "unit": "ms",
-            "source": "User-provided benchmark data",
-            "priority": 1
-          },
-          "power_mw": {
-            "value": 450,
-            "unit": "mW",
-            "source": "User-provided benchmark data",
-            "priority": 1
-          },
-          "memory_mb": {
-            "value": 128,
-            "unit": "MB",
-            "source": "User-provided benchmark data",
-            "priority": 1
-          },
-          "accuracy_delta": {
-            "value": -1.2,
-            "unit": "%",
-            "source": "User-provided benchmark data",
-            "priority": 1
+        "performance": {},
+        "tavily_links": [
+          {
+            "url": "https://www.etsi.org/intellectual-property-rights",
+            "title": "Intellectual Property Rights policy and IPR online database - ETSI"
           }
-        },
-        "tavily_links": []
+        ]
       }
+    },
+    "tavily": {
+      "searches": [
+        {
+          "query": "US20230012345 Edge AI Accelerator for Wearables latency benchmark performance",
+          "num_links": 0,
+          "whitelist": [
+            "etsi.org",
+            "uspto.gov",
+            "wipo.int",
+            "epo.org",
+            "3gpp.org",
+            "ieee.org",
+            "arxiv.org",
+            "github.com"
+          ]
+        },
+        {
+          "query": "US20230012345 power consumption measurement",
+          "num_links": 0,
+          "whitelist": [
+            "etsi.org",
+            "uspto.gov",
+            "wipo.int",
+            "epo.org",
+            "3gpp.org",
+            "ieee.org",
+            "arxiv.org",
+            "github.com"
+          ]
+        },
+        {
+          "query": "US20230012345 SEP declaration ETSI 3GPP",
+          "num_links": 1,
+          "whitelist": [
+            "etsi.org",
+            "uspto.gov",
+            "wipo.int",
+            "epo.org",
+            "3gpp.org",
+            "ieee.org",
+            "arxiv.org",
+            "github.com"
+          ]
+        }
+      ]
     },
     "score": {
       "completed": true,
@@ -1078,7 +1102,7 @@
     },
     "report": {
       "completed": true,
-      "path": "reports\\report_202510231539146546780900.pdf"
+      "path": "reports\\report_202510231601220445270900.pdf"
     }
   },
   "metrics": {
@@ -1087,22 +1111,22 @@
         {
           "doc_id": "WO2018097365A1",
           "collection": "patents",
-          "count": 0,
-          "skipped": 5
+          "count": 5,
+          "skipped": 0
         },
         {
           "doc_id": "SWTRLs",
           "collection": "trl_ref",
-          "count": 0,
-          "skipped": 7
+          "count": 2,
+          "skipped": 0
         }
       ],
       "counts": {
-        "WO2018097365A1": 0,
-        "SWTRLs": 0
+        "WO2018097365A1": 5,
+        "SWTRLs": 2
       },
-      "embedded": 0,
-      "skipped": 12
+      "embedded": 7,
+      "skipped": 0
     }
   },
   "api": {
@@ -1119,7 +1143,7 @@
         "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
         "cache_info": {
           "hit": true,
-          "age_s": 6696.539103
+          "age_s": 8024.027863
         },
         "budget_used": 1,
         "retries": 1,
@@ -1139,7 +1163,7 @@
         "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
         "cache_info": {
           "hit": true,
-          "age_s": 6696.539103
+          "age_s": 8024.027863
         },
         "budget_used": 1,
         "retries": 1,
@@ -1159,7 +1183,7 @@
         "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
         "cache_info": {
           "hit": true,
-          "age_s": 6696.539103
+          "age_s": 8024.027863
         },
         "budget_used": 1,
         "retries": 1,
@@ -1179,7 +1203,7 @@
         "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
         "cache_info": {
           "hit": true,
-          "age_s": 6696.539103
+          "age_s": 8024.027863
         },
         "budget_used": 1,
         "retries": 1,
@@ -1199,7 +1223,7 @@
         "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
         "cache_info": {
           "hit": true,
-          "age_s": 6696.539103
+          "age_s": 8024.027863
         },
         "budget_used": 1,
         "retries": 1,
@@ -1219,7 +1243,7 @@
         "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
         "cache_info": {
           "hit": true,
-          "age_s": 6696.539103
+          "age_s": 8024.027863
         },
         "budget_used": 1,
         "retries": 1,
@@ -1239,7 +1263,7 @@
         "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
         "cache_info": {
           "hit": true,
-          "age_s": 6696.539103
+          "age_s": 8024.027863
         },
         "budget_used": 1,
         "retries": 1,
@@ -1259,7 +1283,7 @@
         "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
         "cache_info": {
           "hit": true,
-          "age_s": 6696.539103
+          "age_s": 8024.027863
         },
         "budget_used": 1,
         "retries": 1,
@@ -1279,7 +1303,7 @@
         "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
         "cache_info": {
           "hit": true,
-          "age_s": 6696.539103
+          "age_s": 8024.027863
         },
         "budget_used": 1,
         "retries": 1,
@@ -1299,7 +1323,7 @@
         "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
         "cache_info": {
           "hit": true,
-          "age_s": 6696.539103
+          "age_s": 8024.027863
         },
         "budget_used": 1,
         "retries": 1,
@@ -1319,7 +1343,7 @@
         "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
         "cache_info": {
           "hit": true,
-          "age_s": 6696.539103
+          "age_s": 8024.027863
         },
         "budget_used": 1,
         "retries": 1,
@@ -1339,7 +1363,7 @@
         "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
         "cache_info": {
           "hit": true,
-          "age_s": 6696.539103
+          "age_s": 8024.027863
         },
         "budget_used": 1,
         "retries": 1,
@@ -1374,7 +1398,7 @@
       "calls": 0,
       "cached": 1,
       "batches": 0,
-      "ts": "2025-10-23T15:39:14.654678+09:00",
+      "ts": "2025-10-23T16:01:22.044527+09:00",
       "cache_hits": 1,
       "budget_used_total": 0,
       "meta": {
@@ -1403,7 +1427,7 @@
       "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
       "cache_info": {
         "hit": true,
-        "age_s": 6696.539103
+        "age_s": 8024.027863
       },
       "budget_used": 1,
       "retries": 1,
@@ -1423,7 +1447,7 @@
       "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
       "cache_info": {
         "hit": true,
-        "age_s": 6696.539103
+        "age_s": 8024.027863
       },
       "budget_used": 1,
       "retries": 1,
@@ -1443,7 +1467,7 @@
       "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
       "cache_info": {
         "hit": true,
-        "age_s": 6696.539103
+        "age_s": 8024.027863
       },
       "budget_used": 1,
       "retries": 1,
@@ -1463,7 +1487,7 @@
       "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
       "cache_info": {
         "hit": true,
-        "age_s": 6696.539103
+        "age_s": 8024.027863
       },
       "budget_used": 1,
       "retries": 1,
@@ -1483,7 +1507,7 @@
       "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
       "cache_info": {
         "hit": true,
-        "age_s": 6696.539103
+        "age_s": 8024.027863
       },
       "budget_used": 1,
       "retries": 1,
@@ -1503,7 +1527,7 @@
       "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
       "cache_info": {
         "hit": true,
-        "age_s": 6696.539103
+        "age_s": 8024.027863
       },
       "budget_used": 1,
       "retries": 1,
@@ -1523,7 +1547,7 @@
       "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
       "cache_info": {
         "hit": true,
-        "age_s": 6696.539103
+        "age_s": 8024.027863
       },
       "budget_used": 1,
       "retries": 1,
@@ -1543,7 +1567,7 @@
       "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
       "cache_info": {
         "hit": true,
-        "age_s": 6696.539103
+        "age_s": 8024.027863
       },
       "budget_used": 1,
       "retries": 1,
@@ -1563,7 +1587,7 @@
       "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
       "cache_info": {
         "hit": true,
-        "age_s": 6696.539103
+        "age_s": 8024.027863
       },
       "budget_used": 1,
       "retries": 1,
@@ -1583,7 +1607,7 @@
       "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
       "cache_info": {
         "hit": true,
-        "age_s": 6696.539103
+        "age_s": 8024.027863
       },
       "budget_used": 1,
       "retries": 1,
@@ -1603,7 +1627,7 @@
       "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
       "cache_info": {
         "hit": true,
-        "age_s": 6696.539103
+        "age_s": 8024.027863
       },
       "budget_used": 1,
       "retries": 1,
@@ -1623,7 +1647,7 @@
       "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
       "cache_info": {
         "hit": true,
-        "age_s": 6696.539103
+        "age_s": 8024.027863
       },
       "budget_used": 1,
       "retries": 1,
@@ -1636,7 +1660,7 @@
     "api_metrics": [
       {
         "doc_id": "US20230012345",
-        "timestamp": "2025-10-23T15:39:14.654678+09:00",
+        "timestamp": "2025-10-23T16:01:22.044527+09:00",
         "collected_keys": [
           "AGE_YEARS",
           "CITATIONS_TOTAL",
@@ -1681,32 +1705,9 @@
     "ORIGINALITY"
   ],
   "performance": {
-    "metrics": {
-      "latency_ms": {
-        "value": 35,
-        "unit": "ms",
-        "source": "User-provided benchmark data",
-        "priority": 1
-      },
-      "power_mw": {
-        "value": 450,
-        "unit": "mW",
-        "source": "User-provided benchmark data",
-        "priority": 1
-      },
-      "memory_mb": {
-        "value": 128,
-        "unit": "MB",
-        "source": "User-provided benchmark data",
-        "priority": 1
-      },
-      "accuracy_delta": {
-        "value": -1.2,
-        "unit": "%",
-        "source": "User-provided benchmark data",
-        "priority": 1
-      }
-    }
+    "metrics": {},
+    "status": "not_available",
+    "reason": "No benchmark data found in public sources"
   },
   "aggregates": {
     "join": {
@@ -1725,7 +1726,7 @@
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": true,
-            "age_s": 6696.539103
+            "age_s": 8024.027863
           },
           "budget_used": 1,
           "retries": 1,
@@ -1745,7 +1746,7 @@
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": true,
-            "age_s": 6696.539103
+            "age_s": 8024.027863
           },
           "budget_used": 1,
           "retries": 1,
@@ -1765,7 +1766,7 @@
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": true,
-            "age_s": 6696.539103
+            "age_s": 8024.027863
           },
           "budget_used": 1,
           "retries": 1,
@@ -1785,7 +1786,7 @@
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": true,
-            "age_s": 6696.539103
+            "age_s": 8024.027863
           },
           "budget_used": 1,
           "retries": 1,
@@ -1805,7 +1806,7 @@
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": true,
-            "age_s": 6696.539103
+            "age_s": 8024.027863
           },
           "budget_used": 1,
           "retries": 1,
@@ -1825,7 +1826,7 @@
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": true,
-            "age_s": 6696.539103
+            "age_s": 8024.027863
           },
           "budget_used": 1,
           "retries": 1,
@@ -1845,7 +1846,7 @@
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": true,
-            "age_s": 6696.539103
+            "age_s": 8024.027863
           },
           "budget_used": 1,
           "retries": 1,
@@ -1865,7 +1866,7 @@
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": true,
-            "age_s": 6696.539103
+            "age_s": 8024.027863
           },
           "budget_used": 1,
           "retries": 1,
@@ -1885,7 +1886,7 @@
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": true,
-            "age_s": 6696.539103
+            "age_s": 8024.027863
           },
           "budget_used": 1,
           "retries": 1,
@@ -1905,7 +1906,7 @@
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": true,
-            "age_s": 6696.539103
+            "age_s": 8024.027863
           },
           "budget_used": 1,
           "retries": 1,
@@ -1925,7 +1926,7 @@
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": true,
-            "age_s": 6696.539103
+            "age_s": 8024.027863
           },
           "budget_used": 1,
           "retries": 1,
@@ -1945,7 +1946,7 @@
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
             "hit": true,
-            "age_s": 6696.539103
+            "age_s": 8024.027863
           },
           "budget_used": 1,
           "retries": 1,
@@ -1961,33 +1962,13 @@
         "LITIGATION_FLAG",
         "ORIGINALITY"
       ],
-      "performance": {
-        "latency_ms": {
-          "value": 35,
-          "unit": "ms",
-          "source": "User-provided benchmark data",
-          "priority": 1
-        },
-        "power_mw": {
-          "value": 450,
-          "unit": "mW",
-          "source": "User-provided benchmark data",
-          "priority": 1
-        },
-        "memory_mb": {
-          "value": 128,
-          "unit": "MB",
-          "source": "User-provided benchmark data",
-          "priority": 1
-        },
-        "accuracy_delta": {
-          "value": -1.2,
-          "unit": "%",
-          "source": "User-provided benchmark data",
-          "priority": 1
+      "performance": {},
+      "tavily_links": [
+        {
+          "url": "https://www.etsi.org/intellectual-property-rights",
+          "title": "Intellectual Property Rights policy and IPR online database - ETSI"
         }
-      },
-      "tavily_links": []
+      ]
     }
   },
   "summaries": {
@@ -2039,11 +2020,5 @@
       "normalized_100pt": 80.0,
       "method": "fixed_threshold"
     }
-  },
-  "adapter_scores": {
-    "latency_score": 68.0,
-    "power_score": 65.0,
-    "memory_score": 100.0,
-    "accuracy_score": 68.0
   }
 }

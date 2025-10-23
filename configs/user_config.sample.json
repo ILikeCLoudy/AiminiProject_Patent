@@ -77,9 +77,15 @@
     "max_queries_per_run": 5,
     "timeout_s": 20,
     "cache_ttl_days": 30,
-    "whitelist_domains": ["etsi.org", "uspto.gov", "wipo.int", "epo.org", "3gpp.org", "ieee.org"],
+    "whitelist_domains": ["etsi.org", "uspto.gov", "wipo.int", "epo.org", "3gpp.org", "ieee.org", "arxiv.org", "github.com"],
     "snapshot_dir": "data/snapshots",
     "max_snapshots": 3
+  },
+
+  "edge_adapter": {
+    "use_tavily": true,
+    "max_benchmark_queries": 2,
+    "max_urls_per_query": 3
   },
 
   "source_mapping": {

@@ -111,6 +111,7 @@ def initialise_state(config: Dict[str, Any], metas: List[Dict[str, Any]], pdfs: 
             "api": config.get("api", {}),
             "llm": config.get("llm", {}),
             "tavily": config.get("tavily", {}),
+            "edge_adapter": config.get("edge_adapter", {}),
             "keywords": config.get("keywords", []),
             "cpc": config.get("cpc", []),
             "period": config.get("period", {}),

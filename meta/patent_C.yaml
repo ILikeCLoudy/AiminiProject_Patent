@@ -11,10 +11,4 @@ forward_citations_5y: 5
 foreign_oriented: true
 sep_declared: true
 std_participation: true
-notes: "Wearable edge AI accelerator with power-saving modes."
-edge_performance:
-  latency_ms: 35
-  power_mw: 450
-  memory_mb: 128
-  accuracy_delta: -1.2
-  source: "User-provided benchmark data"
+notes: "Wearable edge AI accelerator with power-saving modes. Performance metrics will be extracted via Tavily search."
