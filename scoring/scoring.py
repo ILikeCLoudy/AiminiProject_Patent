@@ -1,7 +1,7 @@
 """Scoring engine for the patent analysis pipeline."""
 from __future__ import annotations
 
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 WEIGHTS: Dict[str, float] = {
     "trl": 0.20,
@@ -24,12 +24,15 @@ CLAIM_OPT_RANGE: Dict[str, float] = {
 }
 
 
-def weighted_total(parts: Dict[str, Optional[float]], weights: Dict[str, float]) -> float:
+def weighted_total(
+    parts: Dict[str, Optional[float]], weights: Dict[str, float], *, return_details: bool = False
+) -> float | Tuple[float, Dict[str, Any]]:
     """Compute weighted total with redistribution for missing parts."""
     if not parts:
-        return 0.0
+        return (0.0, {"contributions": {}, "redistributed": False, "missing_keys": [], "fto_penalty": 0.0}) if return_details else 0.0
 
     available = {key: value for key, value in parts.items() if value is not None}
+    missing = [key for key, value in parts.items() if value is None and weights.get(key, 0.0) > 0.0]
     fto_penalty = 0.0
     if "fto" in available:
         raw_fto = available.pop("fto")
@@ -44,14 +47,22 @@ def weighted_total(parts: Dict[str, Optional[float]], weights: Dict[str, float])
 
     weight_sum = sum(weights.get(key, 0.0) for key in weighted_components)
     base_score = 0.0
+    contributions: Dict[str, float] = {}
     if weight_sum > 0.0:
-        base_score = sum(
-            weighted_components[key] * (weights.get(key, 0.0) / weight_sum)
-            for key in weighted_components
-        )
+        for key in weighted_components:
+            contributions[key] = weights.get(key, 0.0) / weight_sum
+        base_score = sum(weighted_components[key] * contributions[key] for key in weighted_components)
 
     total_score = base_score + fto_penalty
-    return max(0.0, min(100.0, total_score))
+    total_score = max(0.0, min(100.0, total_score))
+    if return_details:
+        return total_score, {
+            "contributions": contributions,
+            "redistributed": bool(missing),
+            "missing_keys": missing,
+            "fto_penalty": fto_penalty,
+        }
+    return total_score
 
 
 def decide_label(total: float, flags: Optional[List[str]] = None) -> str:

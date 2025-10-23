@@ -1,0 +1,14 @@
+﻿doc_id: "US20230012345"
+title: "Edge AI Accelerator for Wearables"
+publication_date: "2023-03-15"
+legal_status: "granted"
+renewal_years: 2
+family_size: 3
+countries:
+  - "US"
+  - "KR"
+forward_citations_5y: 5
+foreign_oriented: true
+sep_declared: true
+std_participation: true
+notes: "Wearable edge AI accelerator with power-saving modes."

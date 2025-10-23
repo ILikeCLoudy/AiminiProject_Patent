@@ -1,4 +1,5 @@
 from chunks.indexer import upsert_chunks
+from ingestion.expand_with_api import expand_with_api
 from retrieval.evidence_rag import gather_claims_evidence, gather_trl_evidence
 
 
@@ -36,3 +37,41 @@ def test_provenance_entries_record_checksums(tmp_path):
     assert {"trl", "claims"} <= metrics
     assert any(entry["metric"] == "trl" and entry["checksums"] for entry in provenance)
     assert any(entry["metric"] == "claims" and entry["checksums"] for entry in provenance)
+
+
+def test_api_provenance_blocked_domain(tmp_path):
+    state = {
+        "config": {
+            "api": {
+                "enabled": True,
+                "max_calls_per_run": 1,
+                "batch_size": 5,
+                "cache_dir": str(tmp_path / "api_cache"),
+                "whitelist_domains": ["uspto.gov"],  # exclude other canonical domains
+            },
+            "cache_ttl_days": 30,
+        },
+        "inputs": {
+            "metas": [
+                {
+                    "doc_id": "WO2018097365A1",
+                    "publication_date": "2018-05-31",
+                    "family_size": 1,
+                    "forward_citations_5y": 0,
+                    "countries": ["US"],
+                    "legal_status": "granted",
+                    "renewal_years": 1,
+                    "api_domains": ["wipo.int"],
+                }
+            ]
+        },
+        "exec_meta": {"ts": "2025-01-01T00:00:00"},
+    }
+
+    expand_with_api(state)
+    rows = state["api_meta"]
+    assert any(row["status"] == "blocked_domain" for row in rows)
+    provenance_entries = state["provenance"]["api_metrics"]
+    assert provenance_entries
+    latest = provenance_entries[-1]
+    assert "missing_keys" in latest

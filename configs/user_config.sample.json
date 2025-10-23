@@ -28,11 +28,31 @@
 
   "api": {
     "enabled": true,
+    "use_fixed_values": true,
+    "fixed_metrics": {
+      "CITATIONS_TOTAL": {"value": 12, "unit": "count", "year": 2023},
+      "FAMILY_SIZE": {"value": 4, "unit": "count", "year": 2023},
+      "COUNTRIES": {"value": ["US", "KR", "EU"], "unit": "countries", "year": 2023},
+      "LITIGATION_FLAG": {"value": false, "unit": "boolean", "year": 2012},
+      "RENEWAL_STATUS": {"value": "active", "unit": "status", "year": 2012},
+      "SEP_INDICATION": {"value": "not_declared", "unit": "boolean", "year": 2022},
+      "HHI": {"value": 1800, "unit": "index", "year": 2024},
+      "GENERALITY": {"value": 72.5, "unit": "index", "year": 2001},
+      "ORIGINALITY": {"value": 65.0, "unit": "index", "year": 2000},
+      "AGE_YEARS": {"value": 5.4, "unit": "years", "year": 2025}
+    },
     "mock": false,
     "max_calls_per_run": 200,
     "batch_size": 20,
     "retry": {"max_attempts": 3, "backoff_s": 2},
     "whitelist_domains": ["uspto.gov", "epo.org", "wipo.int", "etsi.org"]
+  },
+
+  "catalog": {
+    "path": "data/catalog/candidates.json",
+    "reference_pdfs": ["data/pdfs/SWTRLs.pdf"],
+    "reference_metas": ["meta/patent_B.yaml"],
+    "top_k": 2
   },
 
   "tavily": {

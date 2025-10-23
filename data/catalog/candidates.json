@@ -1,0 +1,18 @@
+﻿[
+  {
+    "doc_id": "WO2018097365A1",
+    "title": "Edge AI device with quantized neural network",
+    "pdf": "data/pdfs/WO2018097365A1.pdf",
+    "meta": "meta/patent_A.yaml",
+    "keywords": ["edge ai", "quantized", "device"],
+    "cpc": ["G06N", "G06F"]
+  },
+  {
+    "doc_id": "US20230012345",
+    "title": "Edge AI accelerator for wearables",
+    "pdf": "data/pdfs/WO2018097365A1.pdf",
+    "meta": "meta/patent_C.yaml",
+    "keywords": ["wearable", "accelerator", "edge"],
+    "cpc": ["G06F"]
+  }
+]

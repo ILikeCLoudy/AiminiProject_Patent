@@ -6,6 +6,14 @@ import json
 from pathlib import Path
 from typing import Any, Dict, List
 
+try:  # pragma: no cover - optional dependency
+    from dotenv import load_dotenv
+except ImportError:  # pragma: no cover - optional dependency
+    load_dotenv = None  # type: ignore
+
+if load_dotenv is not None:  # pragma: no cover - optional dependency
+    load_dotenv()
+
 from agents.master import MasterAgent
 
 
@@ -81,6 +89,11 @@ def initialise_state(config: Dict[str, Any], metas: List[Dict[str, Any]], pdfs: 
     k_per_query = config.get("k_per_query", 6)
     retrieval_alpha = config.get("retrieval_alpha", 0.6)
 
+    embedding_backend = config.get("embedding_backend", "openai")
+    openai_model = config.get("openai_model", "text-embedding-3-small")
+    openai_timeout = config.get("openai_timeout_s", 30)
+    openai_api_env = config.get("openai_api_key_env", "OPENAI_API_KEY")
+
     state: Dict[str, Any] = {
         "config": {
             "weights": weights_config,
@@ -90,6 +103,10 @@ def initialise_state(config: Dict[str, Any], metas: List[Dict[str, Any]], pdfs: 
             "k_per_query": k_per_query,
             "retrieval_alpha": retrieval_alpha,
             "persist_dir": config.get("persist_dir", "cache/chroma"),
+            "embedding_backend": embedding_backend,
+            "openai_model": openai_model,
+            "openai_timeout_s": openai_timeout,
+            "openai_api_key_env": openai_api_env,
         },
         "inputs": {"pdfs": pdfs, "metas": metas},
         "index": {},
@@ -134,6 +151,11 @@ def initialise_state(config: Dict[str, Any], metas: List[Dict[str, Any]], pdfs: 
 
     exec_meta = state["exec_meta"]
     exec_meta.setdefault("source_badges", {})
+    embed_meta = exec_meta.setdefault("embedding", {})
+    embed_meta.setdefault("backend", embedding_backend)
+    embed_meta.setdefault("model", openai_model)
+    embed_meta.setdefault("timeout_s", openai_timeout)
+    exec_meta.setdefault("openai_api_key_env", openai_api_env)
     exec_meta["source_badges"].update(
         {
             "legal": "Manual",
@@ -161,9 +183,11 @@ def persist_state(state: Dict[str, Any], exec_meta: Dict[str, Any]) -> None:
 def parse_args() -> argparse.Namespace:
     """Parse CLI arguments."""
     parser = argparse.ArgumentParser(description="Run edge AI patent analysis pipeline.")
-    parser.add_argument("--pdfs", nargs="+", required=True, help="List of PDF paths (patent + reference).")
-    parser.add_argument("--metas", nargs="+", required=True, help="List of YAML metadata files.")
+    parser.add_argument("--pdfs", nargs="+", help="List of PDF paths (patent + reference).")
+    parser.add_argument("--metas", nargs="+", help="List of YAML metadata files.")
     parser.add_argument("--config", required=True, help="JSON configuration file.")
+    parser.add_argument("--query", help="Natural language query for patent search and routing.")
+    parser.add_argument("--topk", type=int, help="Number of top candidates to evaluate when using --query.")
     return parser.parse_args()
 
 
@@ -171,52 +195,114 @@ def main() -> None:
     """Run the end-to-end pipeline from CLI arguments."""
     args = parse_args()
 
-    pdf_paths = [str(Path(path)) for path in args.pdfs]
-    meta_paths = [Path(path) for path in args.metas]
     config_path = Path(args.config)
 
     config = json.loads(config_path.read_text(encoding="utf-8"))
-    metas = [load_yaml_file(path) for path in meta_paths]
+    results: List[Dict[str, Any]] = []
 
-    state = initialise_state(config, metas, pdf_paths)
+    if args.query:
+        from routing.router import select_candidates
 
-    master = MasterAgent()
-    master.run(state)
+        catalog_cfg = config.get("catalog", {})
+        candidates = select_candidates(args.query, config, top_k=args.topk or catalog_cfg.get("top_k", 3))
+        if not candidates:
+            raise RuntimeError("No candidates matched the query.")
 
-    persist_state(state, state.get("exec_meta", {}))
+        reference_pdfs = [str(Path(path)) for path in catalog_cfg.get("reference_pdfs", [])]
+        reference_meta_paths = [Path(path) for path in catalog_cfg.get("reference_metas", [])]
 
-    exec_meta = state.get("exec_meta", {})
-    config = state.get("config", {})
-    print(f"orchestrator: {exec_meta.get('orchestrator')} / embedding_backend: {config.get('embedding_backend')} ({config.get('openai_model')})")
-    vector_meta = exec_meta.get("vector", {})
-    print(f"vector_backend: {vector_meta.get('backend')}  persist_dir: {vector_meta.get('persist_dir')}  collection: {vector_meta.get('collection')}")
-    embedding_meta = exec_meta.get("embedding", {})
-    api_meta = exec_meta.get("api", {})
-    print(f"API calls {api_meta.get('calls', 0)} (cached {api_meta.get('cached', 0)}, batches {api_meta.get('batches', 0)})")
-    print(f"Embedding snippets {embedding_meta.get('snippets', 0)} (~{embedding_meta.get('tokens_est', 0)} tokens / cap={embedding_meta.get('cap')})")
+        for candidate in candidates:
+            candidate_pdf = str(Path(candidate["pdf"]))
+            candidate_meta_path = Path(candidate["meta"])
+            pdf_paths = [candidate_pdf] + reference_pdfs
+            meta_paths = [candidate_meta_path] + reference_meta_paths
+            metas = [load_yaml_file(path) for path in meta_paths]
 
-    decision = state.get("decision", {})
-    trl_snippets = len(state.get("evidence", {}).get("trl", {}).get("snippets", []))
-    claim_snippets = len(state.get("evidence", {}).get("claims", {}).get("snippets", []))
+            state = initialise_state(config, metas, pdf_paths)
+            state.setdefault("inputs", {})["query"] = args.query
+            state["inputs"]["candidate"] = candidate
 
-    print(f"Total Score: {decision.get('total', 0):.2f}")
-    print(f"Label: {decision.get('label', 'N/A')}")
-    print(f"Evidence snippets - TRL: {trl_snippets}, Claims: {claim_snippets}")
-    if decision.get("report_path"):
-        print(f"Report generated at: {decision['report_path']}")
+            master = MasterAgent()
+            master.run(state)
+            persist_state(state, state.get("exec_meta", {}))
+            results.append(
+                {
+                    "candidate": candidate,
+                    "decision": state.get("decision", {}),
+                    "scores": state.get("scores", {}),
+                    "report_path": state.get("decision", {}).get("report_path"),
+                }
+            )
+    else:
+        if not args.pdfs or not args.metas:
+            raise ValueError("When --query is not provided, --pdfs and --metas must be supplied.")
 
-    ingestion_metrics = state.get("metrics", {}).get("ingestion", {})
-    embedded = ingestion_metrics.get("embedded", 0)
-    skipped = ingestion_metrics.get("skipped", 0)
-    embedding_meta = exec_meta.get("embedding", {})
-    print(f"embedded: {embedding_meta.get('embedded', 0)}, skipped: {embedding_meta.get('skipped', 0)}")
+        pdf_paths = [str(Path(path)) for path in args.pdfs]
+        meta_paths = [Path(path) for path in args.metas]
+        metas = [load_yaml_file(path) for path in meta_paths]
 
-    retrieval_meta = exec_meta.get("retrieval", {})
-    trl_k = retrieval_meta.get("trl_k_per_query", state["config"].get("k_per_query"))
-    claim_k = retrieval_meta.get("claims_k_per_query", state["config"].get("k_per_query"))
-    trl_count = retrieval_meta.get("trl_snippets", trl_snippets)
-    claim_count = retrieval_meta.get("claims_snippets", claim_snippets)
-    print(f"retrieved: TRL k={trl_k} (snippets={trl_count}), Claims k={claim_k} (snippets={claim_count})")
+        state = initialise_state(config, metas, pdf_paths)
+
+        master = MasterAgent()
+        master.run(state)
+
+        persist_state(state, state.get("exec_meta", {}))
+
+        exec_meta = state.get("exec_meta", {})
+        config = state.get("config", {})
+        print(f"orchestrator: {exec_meta.get('orchestrator')} / embedding_backend: {config.get('embedding_backend')} ({config.get('openai_model')})")
+        vector_meta = exec_meta.get("vector", {})
+        print(f"vector_backend: {vector_meta.get('backend')}  persist_dir: {vector_meta.get('persist_dir')}  collection: {vector_meta.get('collection')}")
+        embedding_meta = exec_meta.get("embedding", {})
+        api_meta = exec_meta.get("api", {})
+        print(f"API calls {api_meta.get('calls', 0)} (cached {api_meta.get('cached', 0)}, batches {api_meta.get('batches', 0)})")
+        print(f"Embedding snippets {embedding_meta.get('snippets', 0)} (~{embedding_meta.get('tokens_est', 0)} tokens / cap={embedding_meta.get('cap')})")
+
+        decision = state.get("decision", {})
+        trl_snippets = len(state.get("evidence", {}).get("trl", {}).get("snippets", []))
+        claim_snippets = len(state.get("evidence", {}).get("claims", {}).get("snippets", []))
+
+        print(f"Total Score: {decision.get('total', 0):.2f}")
+        print(f"Label: {decision.get('label', 'N/A')}")
+        print(f"Evidence snippets - TRL: {trl_snippets}, Claims: {claim_snippets}")
+        if decision.get("report_path"):
+            print(f"Report generated at: {decision['report_path']}")
+
+        ingestion_metrics = state.get("metrics", {}).get("ingestion", {})
+        embedded = ingestion_metrics.get("embedded", 0)
+        skipped = ingestion_metrics.get("skipped", 0)
+        embedding_meta = exec_meta.get("embedding", {})
+        print(f"embedded: {embedding_meta.get('embedded', 0)}, skipped: {embedding_meta.get('skipped', 0)}")
+
+        retrieval_meta = exec_meta.get("retrieval", {})
+        trl_k = retrieval_meta.get("trl_k_per_query", state["config"].get("k_per_query"))
+        claim_k = retrieval_meta.get("claims_k_per_query", state["config"].get("k_per_query"))
+        trl_count = retrieval_meta.get("trl_snippets", trl_snippets)
+        claim_count = retrieval_meta.get("claims_snippets", claim_snippets)
+        print(f"retrieved: TRL k={trl_k} (snippets={trl_count}), Claims k={claim_k} (snippets={claim_count})")
+        return
+
+    ranking = sorted(
+        results,
+        key=lambda item: (item["decision"].get("total") or -1),
+        reverse=True,
+    )
+    ranking_payload = {
+        "query": args.query,
+        "results": ranking,
+    }
+    outputs_dir = Path("outputs")
+    outputs_dir.mkdir(exist_ok=True)
+    (outputs_dir / "ranking.json").write_text(json.dumps(ranking_payload, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    print(f"Evaluated {len(ranking)} candidates for query: {args.query}")
+    for idx, result in enumerate(ranking, start=1):
+        decision = result["decision"]
+        report_path = result.get("report_path")
+        print(
+            f"{idx}. {result['candidate'].get('doc_id')} ??score {decision.get('total', 0):.2f} "
+            f"label {decision.get('label', 'N/A')} (report: {report_path})"
+        )
 
 
 if __name__ == "__main__":

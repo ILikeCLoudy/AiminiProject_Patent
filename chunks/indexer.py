@@ -6,6 +6,7 @@ import json
 import re
 from typing import Any, Dict, Iterable, List, Optional
 
+from embeddings.factory import get_embedder
 from retrieval.vectorstore_factory import get_vectorstore
 
 _EMBED_DIM = 384
@@ -54,11 +55,12 @@ def upsert_chunks(
 
     snapshot = collection.get() if collection.count() > 0 else {"ids": []}
     existing_ids = set(snapshot.get("ids", []))
-    embedded = exec_meta.setdefault("embedding", {}).get("embedded", 0)
-    skipped = exec_meta.setdefault("embedding", {}).get("skipped", 0)
-    snippets = exec_meta["embedding"].setdefault("snippets", 0)
-    tokens_est = exec_meta["embedding"].setdefault("tokens_est", 0)
-    cap = exec_meta["embedding"].setdefault("cap", config.get("embedding_token_cap_per_run", 25000))
+    embedding_meta = exec_meta.setdefault("embedding", {})
+    embedded = embedding_meta.get("embedded", 0)
+    skipped = embedding_meta.get("skipped", 0)
+    snippets = embedding_meta.setdefault("snippets", 0)
+    tokens_est = embedding_meta.setdefault("tokens_est", 0)
+    cap = embedding_meta.setdefault("cap", config.get("embedding_token_cap_per_run", 25000))
 
     ids: List[str] = []
     texts: List[str] = []
@@ -69,11 +71,21 @@ def upsert_chunks(
         chunk_id = chunk["chunk_id"]
         text = chunk["text"]
         meta = dict(chunk.get("meta", {}))
+
+        # normalize metadata so Chroma only sees scalar values
+        normalized_meta: Dict[str, Any] = {}
+        for key, value in meta.items():
+            if isinstance(value, (str, int, float, bool)) or value is None:
+                normalized_meta[key] = value
+            else:
+                normalized_meta[key] = json.dumps(value, ensure_ascii=False)
+        meta = normalized_meta
+
         fingerprint = _build_fingerprint(text, meta)
         meta["fingerprint"] = fingerprint
 
         if meta.get("no_embed") or meta.get("meta_only"):
-            exec_meta["embedding"]["meta_skipped"] = exec_meta["embedding"].get("meta_skipped", 0) + 1
+            embedding_meta["meta_skipped"] = embedding_meta.get("meta_skipped", 0) + 1
             skipped += 1
             continue
 
@@ -123,11 +135,11 @@ def get_collection_records(config_or_name, exec_meta: Optional[Dict[str, Any]] =
     collection, _ = get_vectorstore(config, exec_meta)
     snapshot = collection.get()
     records: List[Dict[str, Any]] = []
-    ids = snapshot.get("ids", [])
-    documents = snapshot.get("documents", [])
-    metadatas = snapshot.get("metadatas", [])
-    embeddings = snapshot.get("embeddings", [])
-    tokens_list = snapshot.get("tokens", embeddings)
+    ids = snapshot.get("ids") or []
+    documents = snapshot.get("documents") or []
+    metadatas = snapshot.get("metadatas") or []
+    embeddings = snapshot.get("embeddings") or []
+    tokens_list = snapshot.get("tokens") or embeddings or []
     for idx, chunk_id in enumerate(ids):
         text = documents[idx]
         meta = metadatas[idx] if idx < len(metadatas) else {}

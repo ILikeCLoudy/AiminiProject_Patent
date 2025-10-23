@@ -6,7 +6,11 @@
     "max_snippets_per_metric": 3,
     "k_per_query": 6,
     "retrieval_alpha": 0.6,
-    "persist_dir": "cache/chroma"
+    "persist_dir": "cache/chroma",
+    "embedding_backend": "openai",
+    "openai_model": "text-embedding-3-small",
+    "openai_timeout_s": 30,
+    "openai_api_key_env": "OPENAI_API_KEY"
   },
   "inputs": {
     "pdfs": [
@@ -15,28 +19,45 @@
     ],
     "metas": [
       {
-        "doc_id": "WO2018097365A1",
-        "title": "...",
-        "publication_date": "2018-05-31",
-        "legal_status": "published",
-        "renewal_years": 0,
-        "family_size": 1,
+        "doc_id": "US20230012345",
+        "title": "Edge AI Accelerator for Wearables",
+        "publication_date": "2023-03-15",
+        "legal_status": "granted",
+        "renewal_years": 2,
+        "family_size": 3,
         "countries": [
-          "WO"
+          "US",
+          "KR"
         ],
-        "forward_citations_5y": 0,
+        "forward_citations_5y": 5,
         "foreign_oriented": true,
-        "sep_declared": false,
-        "std_participation": false,
-        "notes": "Claims  . comprising/wherein  ."
+        "sep_declared": true,
+        "std_participation": true,
+        "notes": "Wearable edge AI accelerator with power-saving modes."
       },
       {
         "doc_id": "SWTRLs",
         "title": "Applying TRLs to Software",
         "publication_date": "2010-01-01",
-        "notes": "Ʈ TRL /. ref ε."
+        "notes": "소프트웨어 TRL 정의/사례. ref 인덱스."
       }
-    ]
+    ],
+    "query": "Edge AI 기술 특허에서 현재 가장 우수한 특허",
+    "candidate": {
+      "doc_id": "US20230012345",
+      "title": "Edge AI accelerator for wearables",
+      "pdf": "data/pdfs/WO2018097365A1.pdf",
+      "meta": "meta/patent_C.yaml",
+      "keywords": [
+        "wearable",
+        "accelerator",
+        "edge"
+      ],
+      "cpc": [
+        "G06F"
+      ],
+      "score": 1.0
+    }
   },
   "index": {
     "patents_index": "patents",
@@ -44,84 +65,87 @@
   },
   "evidence": {
     "trl": {
-      "level": 7.0,
+      "level": 8.5,
       "snippets": [
         {
-          "id": "sec:WO2018097365A1-abstract:0",
-          "text": "An on-device inference apparatus is described, transitioning a prototype into a pilot deployment with real-time quantized processing for edge AI scenarios.",
-          "meta": {
-            "section": "abstract",
-            "len_chars": 155,
-            "doc_id": "WO2018097365A1",
-            "source_path": "data\\pdfs\\WO2018097365A1.pdf",
-            "fingerprint": "bf00c88ba0fde57dcfe43606ee3d63b486dc20c9d6cf02de09c3d65e0e7b3e14"
+          "metric": "trl",
+          "text": "Example progression: prototype -> pilot -> field test -> deployed production services.",
+          "badge": "Local RAG",
+          "source_type": "PDF",
+          "source": "LocalPDF",
+          "source_id": "SWTRLs",
+          "doc_ref": "data\\pdfs\\SWTRLs.pdf",
+          "text_checksum": "sha256:db4c701b98ab604aa77c96ce33dd350ca9ce1957bebac99545319a613cde2087",
+          "offsets": {},
+          "retrieval_ts": "2025-10-23T10:33:26.993948+09:00",
+          "fetch_ts": "2025-10-23T10:33:26.993948+09:00",
+          "cache_info": {
+            "hit": false
           },
-          "score": 0.8158484461094011,
-          "bm25": 1.0,
-          "embedding": 0.5396211152735028,
-          "cue": "pilot"
+          "budget_used": 0,
+          "retries": 0,
+          "status": "ok",
+          "error": null,
+          "score_trace": {
+            "hybrid": 0.6,
+            "bm25": 1.0,
+            "embedding": 0.0,
+            "cue": "prototype"
+          }
         },
         {
-          "id": "sec:WO2018097365A1-description:0",
-          "text": "The disclosed system deploys a compact neural accelerator within wearable and IoT devices. Field tests and relevant environment evaluations demonstrate operational reliability in production-like conditions. The architecture emphasises secure model updates, adaptive quantisation, and low-latency inference tailored for on-device execution.",
-          "meta": {
-            "section": "description",
-            "len_chars": 339,
-            "doc_id": "WO2018097365A1",
-            "source_path": "data\\pdfs\\WO2018097365A1.pdf",
-            "fingerprint": "bf00c88ba0fde57dcfe43606ee3d63b486dc20c9d6cf02de09c3d65e0e7b3e14"
+          "metric": "trl",
+          "text": "TRL 5 corresponds to validating a software prototype in a relevant environment. TRL 6 and TRL 7 involve field test pilots with partially deployed systems. TRL 8 and TRL 9 indicate production-ready and fully deployed software in an operational environment.",
+          "badge": "Local RAG",
+          "source_type": "PDF",
+          "source": "LocalPDF",
+          "source_id": "SWTRLs",
+          "doc_ref": "data\\pdfs\\SWTRLs.pdf",
+          "text_checksum": "sha256:4677364988c632c49efae8c0dd6bc5151168d438631309514cf9acd1d3e3665c",
+          "offsets": {},
+          "retrieval_ts": "2025-10-23T10:33:26.993948+09:00",
+          "fetch_ts": "2025-10-23T10:33:26.993948+09:00",
+          "cache_info": {
+            "hit": false
           },
-          "score": 0.8107979473517044,
-          "bm25": 1.0,
-          "embedding": 0.5269948683792609,
-          "cue": "production"
-        },
-        {
-          "id": "claim:WO2018097365A1-1:0",
-          "text": "A device comprising an on-device processor configured to execute a quantized neural network in real-time within an operational environment, the device including telemetry for prototype to pilot upgrades, adaptive calibration pipelines, secure enclave management, federated aggregation buffers, and a plurality of edge accelerators coordinated by a policy engine that maintains latency thresholds below ten milliseconds while preserving power budgets across mission profiles. The device further comprises memory partitions, compression controllers, wireless radios, fallbacks for disconnected operation, proactive failure detection routines, and orchestrated deployment hooks that enable continuous integration of model updates validated through field trials, pilot deployments, and production readine",
-          "meta": {
-            "section": "claims",
-            "claim_id": 1,
-            "independent": true,
-            "doc_id": "WO2018097365A1",
-            "len_chars": 800,
-            "source_path": "data\\pdfs\\WO2018097365A1.pdf",
-            "fingerprint": "bf00c88ba0fde57dcfe43606ee3d63b486dc20c9d6cf02de09c3d65e0e7b3e14"
-          },
-          "score": 0.7052461126952848,
-          "bm25": 0.8419822802064064,
-          "embedding": 0.5001418614286023,
-          "cue": "pilot"
+          "budget_used": 0,
+          "retries": 0,
+          "status": "ok",
+          "error": null,
+          "score_trace": {
+            "hybrid": 0.6,
+            "bm25": 1.0,
+            "embedding": 0.0,
+            "cue": "deployed"
+          }
         }
       ],
       "ref_snippets": [
         {
-          "id": "sec:SWTRLs-examples:0",
-          "text": "Example progression: prototype -> pilot -> field test -> deployed production services.",
-          "meta": {
-            "section": "examples",
-            "len_chars": 86,
-            "doc_id": "SWTRLs",
-            "source_path": "data\\pdfs\\SWTRLs.pdf",
-            "fingerprint": "9d01eb96b4a8d5508be2a9a0bb8604020318a27ca754785d3b4ff2953df68615"
-          },
-          "score": 0.22248598894880303,
-          "bm25": 0.0,
-          "embedding": 0.5562149723720076
-        },
-        {
-          "id": "sec:SWTRLs-sw_trl:0",
+          "metric": "trl_ref",
           "text": "TRL 5 corresponds to validating a software prototype in a relevant environment. TRL 6 and TRL 7 involve field test pilots with partially deployed systems. TRL 8 and TRL 9 indicate production-ready and fully deployed software in an operational environment.",
-          "meta": {
-            "section": "sw_trl",
-            "len_chars": 255,
-            "doc_id": "SWTRLs",
-            "source_path": "data\\pdfs\\SWTRLs.pdf",
-            "fingerprint": "9d01eb96b4a8d5508be2a9a0bb8604020318a27ca754785d3b4ff2953df68615"
+          "badge": "Local RAG",
+          "source_type": "PDF",
+          "source": "LocalPDF",
+          "source_id": "SWTRLs",
+          "doc_ref": "data\\pdfs\\SWTRLs.pdf",
+          "text_checksum": "sha256:4677364988c632c49efae8c0dd6bc5151168d438631309514cf9acd1d3e3665c",
+          "offsets": {},
+          "retrieval_ts": "2025-10-23T10:33:26.993948+09:00",
+          "fetch_ts": "2025-10-23T10:33:26.993948+09:00",
+          "cache_info": {
+            "hit": false
           },
-          "score": 0.2203617536117994,
-          "bm25": 0.0,
-          "embedding": 0.5509043840294985
+          "budget_used": 0,
+          "retries": 0,
+          "status": "ok",
+          "error": null,
+          "score_trace": {
+            "hybrid": 0.6,
+            "bm25": 1.0,
+            "embedding": 0.0,
+            "cue": null
+          }
         }
       ],
       "source_badge": "Local RAG"
@@ -135,104 +159,325 @@
         "at least one": 1,
         "configured to": 2
       },
-      "snippets": [
+      "snippets": [],
+      "source_badge": "Local RAG"
+    },
+    "api_metrics": {
+      "rows": [
         {
-          "id": "claim:WO2018097365A1-2:0",
-          "text": "The device of claim 1 wherein the processor is configured to execute federated updates on-device, dynamically batching encrypted gradients, reconciling conflict resolution policies, and orchestrating synchronization checkpoints. The device of claim 2 wherein the memory subsystem provides at least one secure enclave with attestation pipelines, redundancy failover, and audit telemetry forwarding pathways.",
-          "meta": {
-            "section": "claims",
-            "claim_id": [
-              2,
-              3
-            ],
-            "independent": false,
-            "doc_id": "WO2018097365A1",
-            "len_chars": 406,
-            "source_path": "data\\pdfs\\WO2018097365A1.pdf",
-            "fingerprint": "bf00c88ba0fde57dcfe43606ee3d63b486dc20c9d6cf02de09c3d65e0e7b3e14"
+          "metric_key": "CITATIONS_TOTAL",
+          "value": null,
+          "unit": "count",
+          "year": 2000,
+          "source_name": "NBER Working Paper 7741",
+          "source_type": "API",
+          "source_id": "NBER-W7741",
+          "source_url": "https://www.nber.org/papers/w7741",
+          "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+          "cache_info": {
+            "hit": false
           },
-          "score": 0.8323501210131079,
-          "bm25": 1.0,
-          "embedding": 0.5808753025327698,
-          "cue": "wherein"
+          "budget_used": 0,
+          "retries": 0,
+          "status": "budget_exceeded",
+          "error": "api_disabled",
+          "chosen": true
         },
         {
-          "id": "claim:WO2018097365A1-1:0",
-          "text": "A device comprising an on-device processor configured to execute a quantized neural network in real-time within an operational environment, the device including telemetry for prototype to pilot upgrades, adaptive calibration pipelines, secure enclave management, federated aggregation buffers, and a plurality of edge accelerators coordinated by a policy engine that maintains latency thresholds below ten milliseconds while preserving power budgets across mission profiles. The device further comprises memory partitions, compression controllers, wireless radios, fallbacks for disconnected operation, proactive failure detection routines, and orchestrated deployment hooks that enable continuous integration of model updates validated through field trials, pilot deployments, and production readine",
-          "meta": {
-            "section": "claims",
-            "claim_id": 1,
-            "independent": true,
-            "doc_id": "WO2018097365A1",
-            "len_chars": 800,
-            "source_path": "data\\pdfs\\WO2018097365A1.pdf",
-            "fingerprint": "bf00c88ba0fde57dcfe43606ee3d63b486dc20c9d6cf02de09c3d65e0e7b3e14"
+          "metric_key": "FAMILY_SIZE",
+          "value": null,
+          "unit": "count",
+          "year": 2024,
+          "source_name": "WIPO IP Indicators",
+          "source_type": "API",
+          "source_id": "WIPO-2024",
+          "source_url": "https://www.wipo.int/web-publications/world-intellectual-property-indicators-2024-highlights/en/patents-highlights.html",
+          "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+          "cache_info": {
+            "hit": false
           },
-          "score": 0.8090244015276048,
-          "bm25": 1.0,
-          "embedding": 0.5225610038190119,
-          "cue": "comprising"
+          "budget_used": 0,
+          "retries": 0,
+          "status": "budget_exceeded",
+          "error": "api_disabled",
+          "chosen": true
         },
         {
-          "id": "claim:WO2018097365A1-1:1",
-          "text": "ough field trials, pilot deployments, and production readiness reviews. The method maintains audit trails, publishes lifecycle manifests, simulates contingencies, verifies redundancy alignments, validates firmware integrity, orchestrates predictive maintenance cycles, coordinates cooperative inference, documents verification artefacts for regulatory certification bodies across multiple jurisdictions, distributes feature extraction workloads across heterogeneous accelerators, harmonizes containerized workloads, balances exploratory learning agendas, audits time-synchronized logs, exports structured compliance reports, administers anomaly remediation workflows, and keeps redundant control planes warm for instant authority transfer.",
-          "meta": {
-            "section": "claims",
-            "claim_id": 1,
-            "independent": true,
-            "doc_id": "WO2018097365A1",
-            "len_chars": 739,
-            "source_path": "data\\pdfs\\WO2018097365A1.pdf",
-            "fingerprint": "bf00c88ba0fde57dcfe43606ee3d63b486dc20c9d6cf02de09c3d65e0e7b3e14"
+          "metric_key": "COUNTRIES",
+          "value": null,
+          "unit": "countries",
+          "year": 2024,
+          "source_name": "WIPO IP Indicators",
+          "source_type": "API",
+          "source_id": "WIPO-2024",
+          "source_url": "https://www.wipo.int/web-publications/world-intellectual-property-indicators-2024-highlights/en/patents-highlights.html",
+          "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+          "cache_info": {
+            "hit": false
           },
-          "score": 0.22099854041401792,
-          "bm25": 0.0,
-          "embedding": 0.5524963510350448,
-          "cue": "configured to"
+          "budget_used": 0,
+          "retries": 0,
+          "status": "budget_exceeded",
+          "error": "api_disabled",
+          "chosen": true
+        },
+        {
+          "metric_key": "LITIGATION_FLAG",
+          "value": null,
+          "unit": "boolean",
+          "year": 2012,
+          "source_name": "USPTO Official Gazette",
+          "source_type": "API",
+          "source_id": "USPTO-OG-2012-52",
+          "source_url": "https://www.uspto.gov/web/offices/com/sol/og/2012/week52/TOCCN/item-80.htm",
+          "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+          "cache_info": {
+            "hit": false
+          },
+          "budget_used": 0,
+          "retries": 0,
+          "status": "budget_exceeded",
+          "error": "api_disabled",
+          "chosen": true
+        },
+        {
+          "metric_key": "RENEWAL_STATUS",
+          "value": null,
+          "unit": "status",
+          "year": 2012,
+          "source_name": "USPTO Maintenance Fee",
+          "source_type": "API",
+          "source_id": "USPTO-FEE",
+          "source_url": "https://www.uspto.gov/web/offices/com/sol/og/2012/week52/TOCCN/item-80.htm",
+          "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+          "cache_info": {
+            "hit": false
+          },
+          "budget_used": 0,
+          "retries": 0,
+          "status": "budget_exceeded",
+          "error": "api_disabled",
+          "chosen": true
+        },
+        {
+          "metric_key": "SEP_INDICATION",
+          "value": null,
+          "unit": "boolean",
+          "year": 2022,
+          "source_name": "ETSI SEP List",
+          "source_type": "API",
+          "source_id": "ETSI-SR-000-314",
+          "source_url": "https://www.etsi.org/deliver/etsi_sr/000300_000399/000314/02.32.01_60/sr_000314v023201p.pdf",
+          "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+          "cache_info": {
+            "hit": false
+          },
+          "budget_used": 0,
+          "retries": 0,
+          "status": "budget_exceeded",
+          "error": "api_disabled",
+          "chosen": true
+        },
+        {
+          "metric_key": "HHI",
+          "value": null,
+          "unit": "index",
+          "year": 2024,
+          "source_name": "DOJ / FTC Guidelines",
+          "source_type": "API",
+          "source_id": "DOJ-HHI",
+          "source_url": "https://www.justice.gov/atr/herfindahl-hirschman-index",
+          "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+          "cache_info": {
+            "hit": false
+          },
+          "budget_used": 0,
+          "retries": 0,
+          "status": "budget_exceeded",
+          "error": "api_disabled",
+          "chosen": true
+        },
+        {
+          "metric_key": "GENERALITY",
+          "value": null,
+          "unit": "index",
+          "year": 2001,
+          "source_name": "NBER Working Paper 8498",
+          "source_type": "API",
+          "source_id": "NBER-W8498",
+          "source_url": "https://www.nber.org/papers/w8498",
+          "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+          "cache_info": {
+            "hit": false
+          },
+          "budget_used": 0,
+          "retries": 0,
+          "status": "budget_exceeded",
+          "error": "api_disabled",
+          "chosen": true
+        },
+        {
+          "metric_key": "ORIGINALITY",
+          "value": null,
+          "unit": "index",
+          "year": 2000,
+          "source_name": "NBER Working Paper 7741",
+          "source_type": "API",
+          "source_id": "NBER-W7741",
+          "source_url": "https://www.nber.org/papers/w7741",
+          "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+          "cache_info": {
+            "hit": false
+          },
+          "budget_used": 0,
+          "retries": 0,
+          "status": "budget_exceeded",
+          "error": "api_disabled",
+          "chosen": true
+        },
+        {
+          "metric_key": "AGE_YEARS",
+          "value": null,
+          "unit": "years",
+          "year": 2025,
+          "source_name": "Google Patents",
+          "source_type": "API",
+          "source_id": "GOOGLE-PATENTS",
+          "source_url": "https://patents.google.com/patent/US20230012345",
+          "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+          "cache_info": {
+            "hit": false
+          },
+          "budget_used": 0,
+          "retries": 0,
+          "status": "budget_exceeded",
+          "error": "api_disabled",
+          "chosen": true
         }
       ],
-      "source_badge": "Local RAG"
+      "missing": [
+        "AGE_YEARS",
+        "CITATIONS_TOTAL",
+        "COUNTRIES",
+        "FAMILY_SIZE",
+        "GENERALITY",
+        "HHI",
+        "LITIGATION_FLAG",
+        "ORIGINALITY",
+        "RENEWAL_STATUS",
+        "SEP_INDICATION"
+      ]
+    },
+    "score": {
+      "weights": {
+        "trl": 0.2631578947368421,
+        "claim": 0.2631578947368421,
+        "legal": 0.10526315789473684,
+        "family": 0.13157894736842105,
+        "foreign": 0.10526315789473684,
+        "renewal": 0.07894736842105263,
+        "std": 0.05263157894736842
+      },
+      "weights_redistributed": true,
+      "missing_weights": [
+        "generality",
+        "originality"
+      ]
     }
   },
   "scores": {
-    "trl": 70.0,
+    "trl": 85.0,
     "claim": 85.0,
-    "legal": 55.0,
-    "family": 50.0,
-    "foreign": 80.0,
+    "legal": 60.0,
+    "family": 45.0,
+    "foreign": 45.0,
     "renewal": 40.0,
-    "std": 35.0,
+    "std": 30.0,
+    "generality": null,
+    "originality": null,
     "fto": 0.0
   },
   "decision": {
-    "total": 66.57894736842104,
-    "label": "M",
-    "flags": [],
-    "report_path": "reports\\report_20251022163334089478.txt"
+    "total": 66.44736842105263,
+    "label": "X",
+    "flags": [
+      "FTO_risk"
+    ],
+    "weights_meta": {
+      "contributions": {
+        "trl": 0.2631578947368421,
+        "claim": 0.2631578947368421,
+        "legal": 0.10526315789473684,
+        "family": 0.13157894736842105,
+        "foreign": 0.10526315789473684,
+        "renewal": 0.07894736842105263,
+        "std": 0.05263157894736842
+      },
+      "redistributed": true,
+      "missing_keys": [
+        "generality",
+        "originality"
+      ],
+      "fto_penalty": 0.0
+    },
+    "weights_redistributed": true,
+    "report_path": "reports\\report_202510231033269939480900.pdf"
   },
   "exec_meta": {
     "source_badges": {
-      "legal": "Manual",
-      "family": "Manual",
-      "foreign": "Manual",
-      "renewal": "Manual",
-      "std": "Manual",
+      "legal": "API meta",
+      "family": "API meta",
+      "foreign": "API meta",
+      "renewal": "API meta",
+      "std": "API meta",
+      "generality": "API meta",
+      "originality": "API meta",
+      "fto": "API meta",
       "trl": "Local RAG",
       "claims": "Local RAG"
     },
     "cache_ttl_days": 30,
     "weights": "use_default",
     "seed": 42,
+    "embedding": {
+      "backend": "openai",
+      "model": "text-embedding-3-small",
+      "timeout_s": 30,
+      "snippets": 0,
+      "tokens_est": 0,
+      "cap": 25000,
+      "embedded": 0,
+      "skipped": 7
+    },
+    "openai_api_key_env": "OPENAI_API_KEY",
     "logs": [
       "WO2018097365A1: fallback parser used, claims=3",
       "SWTRLs: fallback parser used, claims=0",
-      "Ingestion completed: embedded=0, skipped=7",
-      "INGEST: embedded=0 skipped=7",
-      "REPORT generated at reports\\report_20251022163334089478.txt"
+      "Ingestion completed: embedded=0, skipped=12",
+      "INGEST: embedded=0 skipped=12",
+      "API_EXPAND: calls=0 cached=0 batches=0 ok=0/10 missing=AGE_YEARS,CITATIONS_TOTAL,COUNTRIES,FAMILY_SIZE,GENERALITY,HHI,LITIGATION_FLAG,ORIGINALITY,RENEWAL_STATUS,SEP_INDICATION reason=API disabled in configuration.",
+      "TRL: evidence gathered",
+      "CLAIMS: evidence gathered",
+      "JOIN: merged evidence/API metrics (priority=trl)",
+      "SCORE: total=66.45 label=X",
+      "REPORT: generated at reports\\report_202510231033269939480900.pdf",
+      "Pipeline execution completed."
     ],
-    "warnings": [],
-    "ts": "2025-10-22T16:33:34.089478",
+    "warnings": [
+      "API disabled in configuration."
+    ],
+    "plan": [
+      "INGEST",
+      "API_EXPAND",
+      "TRL",
+      "CLAIMS",
+      "JOIN",
+      "SCORE",
+      "REPORT"
+    ],
+    "ts": "2025-10-23T10:33:26.993948+09:00",
     "version": "v0",
+    "orchestrator": "langgraph",
     "fingerprints": {
       "WO2018097365A1": {
         "fingerprint": "bf00c88ba0fde57dcfe43606ee3d63b486dc20c9d6cf02de09c3d65e0e7b3e14",
@@ -247,6 +492,11 @@
         "claims": 0
       }
     },
+    "vector": {
+      "backend": "chroma",
+      "persist_dir": "cache/chroma",
+      "collection": "patents"
+    },
     "ingestion": {
       "last_result": {
         "documents": [
@@ -260,7 +510,7 @@
             "doc_id": "SWTRLs",
             "collection": "trl_ref",
             "count": 0,
-            "skipped": 2
+            "skipped": 7
           }
         ],
         "counts": {
@@ -268,17 +518,298 @@
           "SWTRLs": 0
         },
         "embedded": 0,
-        "skipped": 7
+        "skipped": 12
       }
+    },
+    "completed_nodes": [
+      "INGEST",
+      "API_EXPAND",
+      "TRL",
+      "CLAIMS",
+      "JOIN",
+      "SCORE",
+      "REPORT"
+    ],
+    "api": {
+      "missing_keys": [
+        "AGE_YEARS",
+        "CITATIONS_TOTAL",
+        "COUNTRIES",
+        "FAMILY_SIZE",
+        "GENERALITY",
+        "HHI",
+        "LITIGATION_FLAG",
+        "ORIGINALITY",
+        "RENEWAL_STATUS",
+        "SEP_INDICATION"
+      ],
+      "calls": 0,
+      "cached": 0,
+      "batches": 0,
+      "collected_keys": [
+        "AGE_YEARS",
+        "CITATIONS_TOTAL",
+        "COUNTRIES",
+        "FAMILY_SIZE",
+        "GENERALITY",
+        "HHI",
+        "LITIGATION_FLAG",
+        "ORIGINALITY",
+        "RENEWAL_STATUS",
+        "SEP_INDICATION"
+      ],
+      "ok_count": 0
+    },
+    "prometheus": {
+      "api_meta_ok_total": 0,
+      "api_meta_missing_total": 10
     },
     "retrieval": {
       "alpha": 0.6,
+      "k": 6,
+      "vector_backend": "chroma",
       "trl_k_per_query": 6,
       "max_snippets_per_metric": 3,
-      "trl_snippets": 3,
-      "trl_ref_snippets": 2,
+      "trl_snippets": 2,
+      "trl_ref_snippets": 1,
       "claims_k_per_query": 6,
-      "claims_snippets": 3
+      "claims_alpha": 0.6,
+      "claims_snippets": 0
+    },
+    "join": {
+      "completed": true,
+      "aggregates": {
+        "trl_snippets": 2,
+        "claims_snippets": 0,
+        "api_rows": [
+          {
+            "metric_key": "CITATIONS_TOTAL",
+            "value": null,
+            "unit": "count",
+            "year": 2000,
+            "source_name": "NBER Working Paper 7741",
+            "source_type": "API",
+            "source_id": "NBER-W7741",
+            "source_url": "https://www.nber.org/papers/w7741",
+            "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+            "cache_info": {
+              "hit": false
+            },
+            "budget_used": 0,
+            "retries": 0,
+            "status": "budget_exceeded",
+            "error": "api_disabled",
+            "chosen": true
+          },
+          {
+            "metric_key": "FAMILY_SIZE",
+            "value": null,
+            "unit": "count",
+            "year": 2024,
+            "source_name": "WIPO IP Indicators",
+            "source_type": "API",
+            "source_id": "WIPO-2024",
+            "source_url": "https://www.wipo.int/web-publications/world-intellectual-property-indicators-2024-highlights/en/patents-highlights.html",
+            "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+            "cache_info": {
+              "hit": false
+            },
+            "budget_used": 0,
+            "retries": 0,
+            "status": "budget_exceeded",
+            "error": "api_disabled",
+            "chosen": true
+          },
+          {
+            "metric_key": "COUNTRIES",
+            "value": null,
+            "unit": "countries",
+            "year": 2024,
+            "source_name": "WIPO IP Indicators",
+            "source_type": "API",
+            "source_id": "WIPO-2024",
+            "source_url": "https://www.wipo.int/web-publications/world-intellectual-property-indicators-2024-highlights/en/patents-highlights.html",
+            "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+            "cache_info": {
+              "hit": false
+            },
+            "budget_used": 0,
+            "retries": 0,
+            "status": "budget_exceeded",
+            "error": "api_disabled",
+            "chosen": true
+          },
+          {
+            "metric_key": "LITIGATION_FLAG",
+            "value": null,
+            "unit": "boolean",
+            "year": 2012,
+            "source_name": "USPTO Official Gazette",
+            "source_type": "API",
+            "source_id": "USPTO-OG-2012-52",
+            "source_url": "https://www.uspto.gov/web/offices/com/sol/og/2012/week52/TOCCN/item-80.htm",
+            "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+            "cache_info": {
+              "hit": false
+            },
+            "budget_used": 0,
+            "retries": 0,
+            "status": "budget_exceeded",
+            "error": "api_disabled",
+            "chosen": true
+          },
+          {
+            "metric_key": "RENEWAL_STATUS",
+            "value": null,
+            "unit": "status",
+            "year": 2012,
+            "source_name": "USPTO Maintenance Fee",
+            "source_type": "API",
+            "source_id": "USPTO-FEE",
+            "source_url": "https://www.uspto.gov/web/offices/com/sol/og/2012/week52/TOCCN/item-80.htm",
+            "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+            "cache_info": {
+              "hit": false
+            },
+            "budget_used": 0,
+            "retries": 0,
+            "status": "budget_exceeded",
+            "error": "api_disabled",
+            "chosen": true
+          },
+          {
+            "metric_key": "SEP_INDICATION",
+            "value": null,
+            "unit": "boolean",
+            "year": 2022,
+            "source_name": "ETSI SEP List",
+            "source_type": "API",
+            "source_id": "ETSI-SR-000-314",
+            "source_url": "https://www.etsi.org/deliver/etsi_sr/000300_000399/000314/02.32.01_60/sr_000314v023201p.pdf",
+            "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+            "cache_info": {
+              "hit": false
+            },
+            "budget_used": 0,
+            "retries": 0,
+            "status": "budget_exceeded",
+            "error": "api_disabled",
+            "chosen": true
+          },
+          {
+            "metric_key": "HHI",
+            "value": null,
+            "unit": "index",
+            "year": 2024,
+            "source_name": "DOJ / FTC Guidelines",
+            "source_type": "API",
+            "source_id": "DOJ-HHI",
+            "source_url": "https://www.justice.gov/atr/herfindahl-hirschman-index",
+            "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+            "cache_info": {
+              "hit": false
+            },
+            "budget_used": 0,
+            "retries": 0,
+            "status": "budget_exceeded",
+            "error": "api_disabled",
+            "chosen": true
+          },
+          {
+            "metric_key": "GENERALITY",
+            "value": null,
+            "unit": "index",
+            "year": 2001,
+            "source_name": "NBER Working Paper 8498",
+            "source_type": "API",
+            "source_id": "NBER-W8498",
+            "source_url": "https://www.nber.org/papers/w8498",
+            "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+            "cache_info": {
+              "hit": false
+            },
+            "budget_used": 0,
+            "retries": 0,
+            "status": "budget_exceeded",
+            "error": "api_disabled",
+            "chosen": true
+          },
+          {
+            "metric_key": "ORIGINALITY",
+            "value": null,
+            "unit": "index",
+            "year": 2000,
+            "source_name": "NBER Working Paper 7741",
+            "source_type": "API",
+            "source_id": "NBER-W7741",
+            "source_url": "https://www.nber.org/papers/w7741",
+            "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+            "cache_info": {
+              "hit": false
+            },
+            "budget_used": 0,
+            "retries": 0,
+            "status": "budget_exceeded",
+            "error": "api_disabled",
+            "chosen": true
+          },
+          {
+            "metric_key": "AGE_YEARS",
+            "value": null,
+            "unit": "years",
+            "year": 2025,
+            "source_name": "Google Patents",
+            "source_type": "API",
+            "source_id": "GOOGLE-PATENTS",
+            "source_url": "https://patents.google.com/patent/US20230012345",
+            "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+            "cache_info": {
+              "hit": false
+            },
+            "budget_used": 0,
+            "retries": 0,
+            "status": "budget_exceeded",
+            "error": "api_disabled",
+            "chosen": true
+          }
+        ],
+        "api_missing": [
+          "AGE_YEARS",
+          "CITATIONS_TOTAL",
+          "COUNTRIES",
+          "FAMILY_SIZE",
+          "GENERALITY",
+          "HHI",
+          "LITIGATION_FLAG",
+          "ORIGINALITY",
+          "RENEWAL_STATUS",
+          "SEP_INDICATION"
+        ],
+        "performance": {}
+      }
+    },
+    "score": {
+      "completed": true,
+      "total": 66.44736842105263,
+      "label": "X",
+      "weights": {
+        "trl": 0.2631578947368421,
+        "claim": 0.2631578947368421,
+        "legal": 0.10526315789473684,
+        "family": 0.13157894736842105,
+        "foreign": 0.10526315789473684,
+        "renewal": 0.07894736842105263,
+        "std": 0.05263157894736842
+      },
+      "redistributed": true,
+      "missing_weights": [
+        "generality",
+        "originality"
+      ]
+    },
+    "report": {
+      "completed": true,
+      "path": "reports\\report_202510231033269939480900.pdf"
     }
   },
   "metrics": {
@@ -294,7 +825,7 @@
           "doc_id": "SWTRLs",
           "collection": "trl_ref",
           "count": 0,
-          "skipped": 2
+          "skipped": 7
         }
       ],
       "counts": {
@@ -302,7 +833,718 @@
         "SWTRLs": 0
       },
       "embedded": 0,
-      "skipped": 7
+      "skipped": 12
     }
+  },
+  "api": {
+    "rows": [
+      {
+        "metric_key": "CITATIONS_TOTAL",
+        "value": null,
+        "unit": "count",
+        "year": 2000,
+        "source_name": "NBER Working Paper 7741",
+        "source_type": "API",
+        "source_id": "NBER-W7741",
+        "source_url": "https://www.nber.org/papers/w7741",
+        "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+        "cache_info": {
+          "hit": false
+        },
+        "budget_used": 0,
+        "retries": 0,
+        "status": "budget_exceeded",
+        "error": "api_disabled",
+        "chosen": true
+      },
+      {
+        "metric_key": "FAMILY_SIZE",
+        "value": null,
+        "unit": "count",
+        "year": 2024,
+        "source_name": "WIPO IP Indicators",
+        "source_type": "API",
+        "source_id": "WIPO-2024",
+        "source_url": "https://www.wipo.int/web-publications/world-intellectual-property-indicators-2024-highlights/en/patents-highlights.html",
+        "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+        "cache_info": {
+          "hit": false
+        },
+        "budget_used": 0,
+        "retries": 0,
+        "status": "budget_exceeded",
+        "error": "api_disabled",
+        "chosen": true
+      },
+      {
+        "metric_key": "COUNTRIES",
+        "value": null,
+        "unit": "countries",
+        "year": 2024,
+        "source_name": "WIPO IP Indicators",
+        "source_type": "API",
+        "source_id": "WIPO-2024",
+        "source_url": "https://www.wipo.int/web-publications/world-intellectual-property-indicators-2024-highlights/en/patents-highlights.html",
+        "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+        "cache_info": {
+          "hit": false
+        },
+        "budget_used": 0,
+        "retries": 0,
+        "status": "budget_exceeded",
+        "error": "api_disabled",
+        "chosen": true
+      },
+      {
+        "metric_key": "LITIGATION_FLAG",
+        "value": null,
+        "unit": "boolean",
+        "year": 2012,
+        "source_name": "USPTO Official Gazette",
+        "source_type": "API",
+        "source_id": "USPTO-OG-2012-52",
+        "source_url": "https://www.uspto.gov/web/offices/com/sol/og/2012/week52/TOCCN/item-80.htm",
+        "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+        "cache_info": {
+          "hit": false
+        },
+        "budget_used": 0,
+        "retries": 0,
+        "status": "budget_exceeded",
+        "error": "api_disabled",
+        "chosen": true
+      },
+      {
+        "metric_key": "RENEWAL_STATUS",
+        "value": null,
+        "unit": "status",
+        "year": 2012,
+        "source_name": "USPTO Maintenance Fee",
+        "source_type": "API",
+        "source_id": "USPTO-FEE",
+        "source_url": "https://www.uspto.gov/web/offices/com/sol/og/2012/week52/TOCCN/item-80.htm",
+        "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+        "cache_info": {
+          "hit": false
+        },
+        "budget_used": 0,
+        "retries": 0,
+        "status": "budget_exceeded",
+        "error": "api_disabled",
+        "chosen": true
+      },
+      {
+        "metric_key": "SEP_INDICATION",
+        "value": null,
+        "unit": "boolean",
+        "year": 2022,
+        "source_name": "ETSI SEP List",
+        "source_type": "API",
+        "source_id": "ETSI-SR-000-314",
+        "source_url": "https://www.etsi.org/deliver/etsi_sr/000300_000399/000314/02.32.01_60/sr_000314v023201p.pdf",
+        "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+        "cache_info": {
+          "hit": false
+        },
+        "budget_used": 0,
+        "retries": 0,
+        "status": "budget_exceeded",
+        "error": "api_disabled",
+        "chosen": true
+      },
+      {
+        "metric_key": "HHI",
+        "value": null,
+        "unit": "index",
+        "year": 2024,
+        "source_name": "DOJ / FTC Guidelines",
+        "source_type": "API",
+        "source_id": "DOJ-HHI",
+        "source_url": "https://www.justice.gov/atr/herfindahl-hirschman-index",
+        "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+        "cache_info": {
+          "hit": false
+        },
+        "budget_used": 0,
+        "retries": 0,
+        "status": "budget_exceeded",
+        "error": "api_disabled",
+        "chosen": true
+      },
+      {
+        "metric_key": "GENERALITY",
+        "value": null,
+        "unit": "index",
+        "year": 2001,
+        "source_name": "NBER Working Paper 8498",
+        "source_type": "API",
+        "source_id": "NBER-W8498",
+        "source_url": "https://www.nber.org/papers/w8498",
+        "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+        "cache_info": {
+          "hit": false
+        },
+        "budget_used": 0,
+        "retries": 0,
+        "status": "budget_exceeded",
+        "error": "api_disabled",
+        "chosen": true
+      },
+      {
+        "metric_key": "ORIGINALITY",
+        "value": null,
+        "unit": "index",
+        "year": 2000,
+        "source_name": "NBER Working Paper 7741",
+        "source_type": "API",
+        "source_id": "NBER-W7741",
+        "source_url": "https://www.nber.org/papers/w7741",
+        "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+        "cache_info": {
+          "hit": false
+        },
+        "budget_used": 0,
+        "retries": 0,
+        "status": "budget_exceeded",
+        "error": "api_disabled",
+        "chosen": true
+      },
+      {
+        "metric_key": "AGE_YEARS",
+        "value": null,
+        "unit": "years",
+        "year": 2025,
+        "source_name": "Google Patents",
+        "source_type": "API",
+        "source_id": "GOOGLE-PATENTS",
+        "source_url": "https://patents.google.com/patent/US20230012345",
+        "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+        "cache_info": {
+          "hit": false
+        },
+        "budget_used": 0,
+        "retries": 0,
+        "status": "budget_exceeded",
+        "error": "api_disabled",
+        "chosen": true
+      }
+    ],
+    "summary": {
+      "doc_id": "US20230012345",
+      "collected_keys": [
+        "AGE_YEARS",
+        "CITATIONS_TOTAL",
+        "COUNTRIES",
+        "FAMILY_SIZE",
+        "GENERALITY",
+        "HHI",
+        "LITIGATION_FLAG",
+        "ORIGINALITY",
+        "RENEWAL_STATUS",
+        "SEP_INDICATION"
+      ],
+      "missing_keys": [
+        "AGE_YEARS",
+        "CITATIONS_TOTAL",
+        "COUNTRIES",
+        "FAMILY_SIZE",
+        "GENERALITY",
+        "HHI",
+        "LITIGATION_FLAG",
+        "ORIGINALITY",
+        "RENEWAL_STATUS",
+        "SEP_INDICATION"
+      ],
+      "ok_count": 0,
+      "total_metrics": 10,
+      "calls": 0,
+      "cached": 0,
+      "batches": 0,
+      "ts": "2025-10-23T10:33:26.993948+09:00",
+      "cache_hits": 0,
+      "budget_used_total": 0,
+      "meta": {
+        "enabled": false
+      }
+    },
+    "missing_keys": [
+      "AGE_YEARS",
+      "CITATIONS_TOTAL",
+      "COUNTRIES",
+      "FAMILY_SIZE",
+      "GENERALITY",
+      "HHI",
+      "LITIGATION_FLAG",
+      "ORIGINALITY",
+      "RENEWAL_STATUS",
+      "SEP_INDICATION"
+    ]
+  },
+  "api_meta": [
+    {
+      "metric_key": "CITATIONS_TOTAL",
+      "value": null,
+      "unit": "count",
+      "year": 2000,
+      "source_name": "NBER Working Paper 7741",
+      "source_type": "API",
+      "source_id": "NBER-W7741",
+      "source_url": "https://www.nber.org/papers/w7741",
+      "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+      "cache_info": {
+        "hit": false
+      },
+      "budget_used": 0,
+      "retries": 0,
+      "status": "budget_exceeded",
+      "error": "api_disabled",
+      "chosen": true
+    },
+    {
+      "metric_key": "FAMILY_SIZE",
+      "value": null,
+      "unit": "count",
+      "year": 2024,
+      "source_name": "WIPO IP Indicators",
+      "source_type": "API",
+      "source_id": "WIPO-2024",
+      "source_url": "https://www.wipo.int/web-publications/world-intellectual-property-indicators-2024-highlights/en/patents-highlights.html",
+      "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+      "cache_info": {
+        "hit": false
+      },
+      "budget_used": 0,
+      "retries": 0,
+      "status": "budget_exceeded",
+      "error": "api_disabled",
+      "chosen": true
+    },
+    {
+      "metric_key": "COUNTRIES",
+      "value": null,
+      "unit": "countries",
+      "year": 2024,
+      "source_name": "WIPO IP Indicators",
+      "source_type": "API",
+      "source_id": "WIPO-2024",
+      "source_url": "https://www.wipo.int/web-publications/world-intellectual-property-indicators-2024-highlights/en/patents-highlights.html",
+      "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+      "cache_info": {
+        "hit": false
+      },
+      "budget_used": 0,
+      "retries": 0,
+      "status": "budget_exceeded",
+      "error": "api_disabled",
+      "chosen": true
+    },
+    {
+      "metric_key": "LITIGATION_FLAG",
+      "value": null,
+      "unit": "boolean",
+      "year": 2012,
+      "source_name": "USPTO Official Gazette",
+      "source_type": "API",
+      "source_id": "USPTO-OG-2012-52",
+      "source_url": "https://www.uspto.gov/web/offices/com/sol/og/2012/week52/TOCCN/item-80.htm",
+      "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+      "cache_info": {
+        "hit": false
+      },
+      "budget_used": 0,
+      "retries": 0,
+      "status": "budget_exceeded",
+      "error": "api_disabled",
+      "chosen": true
+    },
+    {
+      "metric_key": "RENEWAL_STATUS",
+      "value": null,
+      "unit": "status",
+      "year": 2012,
+      "source_name": "USPTO Maintenance Fee",
+      "source_type": "API",
+      "source_id": "USPTO-FEE",
+      "source_url": "https://www.uspto.gov/web/offices/com/sol/og/2012/week52/TOCCN/item-80.htm",
+      "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+      "cache_info": {
+        "hit": false
+      },
+      "budget_used": 0,
+      "retries": 0,
+      "status": "budget_exceeded",
+      "error": "api_disabled",
+      "chosen": true
+    },
+    {
+      "metric_key": "SEP_INDICATION",
+      "value": null,
+      "unit": "boolean",
+      "year": 2022,
+      "source_name": "ETSI SEP List",
+      "source_type": "API",
+      "source_id": "ETSI-SR-000-314",
+      "source_url": "https://www.etsi.org/deliver/etsi_sr/000300_000399/000314/02.32.01_60/sr_000314v023201p.pdf",
+      "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+      "cache_info": {
+        "hit": false
+      },
+      "budget_used": 0,
+      "retries": 0,
+      "status": "budget_exceeded",
+      "error": "api_disabled",
+      "chosen": true
+    },
+    {
+      "metric_key": "HHI",
+      "value": null,
+      "unit": "index",
+      "year": 2024,
+      "source_name": "DOJ / FTC Guidelines",
+      "source_type": "API",
+      "source_id": "DOJ-HHI",
+      "source_url": "https://www.justice.gov/atr/herfindahl-hirschman-index",
+      "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+      "cache_info": {
+        "hit": false
+      },
+      "budget_used": 0,
+      "retries": 0,
+      "status": "budget_exceeded",
+      "error": "api_disabled",
+      "chosen": true
+    },
+    {
+      "metric_key": "GENERALITY",
+      "value": null,
+      "unit": "index",
+      "year": 2001,
+      "source_name": "NBER Working Paper 8498",
+      "source_type": "API",
+      "source_id": "NBER-W8498",
+      "source_url": "https://www.nber.org/papers/w8498",
+      "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+      "cache_info": {
+        "hit": false
+      },
+      "budget_used": 0,
+      "retries": 0,
+      "status": "budget_exceeded",
+      "error": "api_disabled",
+      "chosen": true
+    },
+    {
+      "metric_key": "ORIGINALITY",
+      "value": null,
+      "unit": "index",
+      "year": 2000,
+      "source_name": "NBER Working Paper 7741",
+      "source_type": "API",
+      "source_id": "NBER-W7741",
+      "source_url": "https://www.nber.org/papers/w7741",
+      "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+      "cache_info": {
+        "hit": false
+      },
+      "budget_used": 0,
+      "retries": 0,
+      "status": "budget_exceeded",
+      "error": "api_disabled",
+      "chosen": true
+    },
+    {
+      "metric_key": "AGE_YEARS",
+      "value": null,
+      "unit": "years",
+      "year": 2025,
+      "source_name": "Google Patents",
+      "source_type": "API",
+      "source_id": "GOOGLE-PATENTS",
+      "source_url": "https://patents.google.com/patent/US20230012345",
+      "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+      "cache_info": {
+        "hit": false
+      },
+      "budget_used": 0,
+      "retries": 0,
+      "status": "budget_exceeded",
+      "error": "api_disabled",
+      "chosen": true
+    }
+  ],
+  "provenance": {
+    "api_metrics": [
+      {
+        "doc_id": "US20230012345",
+        "timestamp": "2025-10-23T10:33:26.993948+09:00",
+        "collected_keys": [
+          "AGE_YEARS",
+          "CITATIONS_TOTAL",
+          "COUNTRIES",
+          "FAMILY_SIZE",
+          "GENERALITY",
+          "HHI",
+          "LITIGATION_FLAG",
+          "ORIGINALITY",
+          "RENEWAL_STATUS",
+          "SEP_INDICATION"
+        ],
+        "missing_keys": [
+          "AGE_YEARS",
+          "CITATIONS_TOTAL",
+          "COUNTRIES",
+          "FAMILY_SIZE",
+          "GENERALITY",
+          "HHI",
+          "LITIGATION_FLAG",
+          "ORIGINALITY",
+          "RENEWAL_STATUS",
+          "SEP_INDICATION"
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "metric": "trl",
+        "checksums": [
+          "sha256:db4c701b98ab604aa77c96ce33dd350ca9ce1957bebac99545319a613cde2087",
+          "sha256:4677364988c632c49efae8c0dd6bc5151168d438631309514cf9acd1d3e3665c"
+        ],
+        "badge": "Local RAG"
+      }
+    ]
+  },
+  "routing": {
+    "priority": "trl",
+    "has_sep": false
+  },
+  "api_missing_flags": [
+    "AGE_YEARS",
+    "CITATIONS_TOTAL",
+    "COUNTRIES",
+    "FAMILY_SIZE",
+    "GENERALITY",
+    "HHI",
+    "LITIGATION_FLAG",
+    "ORIGINALITY",
+    "RENEWAL_STATUS",
+    "SEP_INDICATION"
+  ],
+  "performance": {
+    "metrics": {}
+  },
+  "aggregates": {
+    "join": {
+      "trl_snippets": 2,
+      "claims_snippets": 0,
+      "api_rows": [
+        {
+          "metric_key": "CITATIONS_TOTAL",
+          "value": null,
+          "unit": "count",
+          "year": 2000,
+          "source_name": "NBER Working Paper 7741",
+          "source_type": "API",
+          "source_id": "NBER-W7741",
+          "source_url": "https://www.nber.org/papers/w7741",
+          "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+          "cache_info": {
+            "hit": false
+          },
+          "budget_used": 0,
+          "retries": 0,
+          "status": "budget_exceeded",
+          "error": "api_disabled",
+          "chosen": true
+        },
+        {
+          "metric_key": "FAMILY_SIZE",
+          "value": null,
+          "unit": "count",
+          "year": 2024,
+          "source_name": "WIPO IP Indicators",
+          "source_type": "API",
+          "source_id": "WIPO-2024",
+          "source_url": "https://www.wipo.int/web-publications/world-intellectual-property-indicators-2024-highlights/en/patents-highlights.html",
+          "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+          "cache_info": {
+            "hit": false
+          },
+          "budget_used": 0,
+          "retries": 0,
+          "status": "budget_exceeded",
+          "error": "api_disabled",
+          "chosen": true
+        },
+        {
+          "metric_key": "COUNTRIES",
+          "value": null,
+          "unit": "countries",
+          "year": 2024,
+          "source_name": "WIPO IP Indicators",
+          "source_type": "API",
+          "source_id": "WIPO-2024",
+          "source_url": "https://www.wipo.int/web-publications/world-intellectual-property-indicators-2024-highlights/en/patents-highlights.html",
+          "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+          "cache_info": {
+            "hit": false
+          },
+          "budget_used": 0,
+          "retries": 0,
+          "status": "budget_exceeded",
+          "error": "api_disabled",
+          "chosen": true
+        },
+        {
+          "metric_key": "LITIGATION_FLAG",
+          "value": null,
+          "unit": "boolean",
+          "year": 2012,
+          "source_name": "USPTO Official Gazette",
+          "source_type": "API",
+          "source_id": "USPTO-OG-2012-52",
+          "source_url": "https://www.uspto.gov/web/offices/com/sol/og/2012/week52/TOCCN/item-80.htm",
+          "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+          "cache_info": {
+            "hit": false
+          },
+          "budget_used": 0,
+          "retries": 0,
+          "status": "budget_exceeded",
+          "error": "api_disabled",
+          "chosen": true
+        },
+        {
+          "metric_key": "RENEWAL_STATUS",
+          "value": null,
+          "unit": "status",
+          "year": 2012,
+          "source_name": "USPTO Maintenance Fee",
+          "source_type": "API",
+          "source_id": "USPTO-FEE",
+          "source_url": "https://www.uspto.gov/web/offices/com/sol/og/2012/week52/TOCCN/item-80.htm",
+          "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+          "cache_info": {
+            "hit": false
+          },
+          "budget_used": 0,
+          "retries": 0,
+          "status": "budget_exceeded",
+          "error": "api_disabled",
+          "chosen": true
+        },
+        {
+          "metric_key": "SEP_INDICATION",
+          "value": null,
+          "unit": "boolean",
+          "year": 2022,
+          "source_name": "ETSI SEP List",
+          "source_type": "API",
+          "source_id": "ETSI-SR-000-314",
+          "source_url": "https://www.etsi.org/deliver/etsi_sr/000300_000399/000314/02.32.01_60/sr_000314v023201p.pdf",
+          "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+          "cache_info": {
+            "hit": false
+          },
+          "budget_used": 0,
+          "retries": 0,
+          "status": "budget_exceeded",
+          "error": "api_disabled",
+          "chosen": true
+        },
+        {
+          "metric_key": "HHI",
+          "value": null,
+          "unit": "index",
+          "year": 2024,
+          "source_name": "DOJ / FTC Guidelines",
+          "source_type": "API",
+          "source_id": "DOJ-HHI",
+          "source_url": "https://www.justice.gov/atr/herfindahl-hirschman-index",
+          "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+          "cache_info": {
+            "hit": false
+          },
+          "budget_used": 0,
+          "retries": 0,
+          "status": "budget_exceeded",
+          "error": "api_disabled",
+          "chosen": true
+        },
+        {
+          "metric_key": "GENERALITY",
+          "value": null,
+          "unit": "index",
+          "year": 2001,
+          "source_name": "NBER Working Paper 8498",
+          "source_type": "API",
+          "source_id": "NBER-W8498",
+          "source_url": "https://www.nber.org/papers/w8498",
+          "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+          "cache_info": {
+            "hit": false
+          },
+          "budget_used": 0,
+          "retries": 0,
+          "status": "budget_exceeded",
+          "error": "api_disabled",
+          "chosen": true
+        },
+        {
+          "metric_key": "ORIGINALITY",
+          "value": null,
+          "unit": "index",
+          "year": 2000,
+          "source_name": "NBER Working Paper 7741",
+          "source_type": "API",
+          "source_id": "NBER-W7741",
+          "source_url": "https://www.nber.org/papers/w7741",
+          "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+          "cache_info": {
+            "hit": false
+          },
+          "budget_used": 0,
+          "retries": 0,
+          "status": "budget_exceeded",
+          "error": "api_disabled",
+          "chosen": true
+        },
+        {
+          "metric_key": "AGE_YEARS",
+          "value": null,
+          "unit": "years",
+          "year": 2025,
+          "source_name": "Google Patents",
+          "source_type": "API",
+          "source_id": "GOOGLE-PATENTS",
+          "source_url": "https://patents.google.com/patent/US20230012345",
+          "fetch_ts": "2025-10-23T01:33:27.071129+00:00",
+          "cache_info": {
+            "hit": false
+          },
+          "budget_used": 0,
+          "retries": 0,
+          "status": "budget_exceeded",
+          "error": "api_disabled",
+          "chosen": true
+        }
+      ],
+      "api_missing": [
+        "AGE_YEARS",
+        "CITATIONS_TOTAL",
+        "COUNTRIES",
+        "FAMILY_SIZE",
+        "GENERALITY",
+        "HHI",
+        "LITIGATION_FLAG",
+        "ORIGINALITY",
+        "RENEWAL_STATUS",
+        "SEP_INDICATION"
+      ],
+      "performance": {}
+    }
+  },
+  "synthesis": {
+    "ps_e_summary": "Problem: identify enforceable claims for edge AI execution deployments. Solution: independent claims outline edge inference orchestration with configurable modules. Evidence: TRL estimate 8.5 with 0 forward citations supports readiness."
   }
 }

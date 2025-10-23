@@ -63,6 +63,7 @@ def _build_evidence_entries(
         if max_chars and len(text) > max_chars:
             text = text[: max(0, max_chars - 3)].rstrip() + "..."
         checksum = "sha256:" + hashlib.sha256(text.encode("utf-8", errors="ignore")).hexdigest()
+        doc_ref = meta.get("doc_ref") or meta.get("source_path")
         entry = {
             "metric": metric,
             "text": text,
@@ -70,10 +71,16 @@ def _build_evidence_entries(
             "source_type": meta.get("source_type", "PDF"),
             "source": meta.get("source", meta.get("doc_id", "")),
             "source_id": meta.get("source_id", meta.get("doc_id", "")),
-            "doc_ref": meta.get("doc_ref"),
+            "doc_ref": doc_ref,
             "text_checksum": checksum,
             "offsets": meta.get("offsets", {}),
             "retrieval_ts": retrieval_ts,
+            "fetch_ts": retrieval_ts,
+            "cache_info": {"hit": False},
+            "budget_used": 0,
+            "retries": 0,
+            "status": "ok",
+            "error": None,
             "score_trace": {
                 "hybrid": snippet.get("score"),
                 "bm25": snippet.get("bm25"),
@@ -92,12 +99,17 @@ def _aggregate_hits(
     exec_meta: Dict[str, Any],
     k_per_query: int,
     filter_meta: Dict[str, Any] | None = None,
+    allowed_docs: Iterable[str] | None = None,
 ) -> List[Dict[str, Any]]:
     aggregated: Dict[str, Dict[str, Any]] = {}
+    allowed = {doc.lower() for doc in (allowed_docs or []) if isinstance(doc, str)}
     for cue in cues:
         hits = hybrid_search(cue, collection, config, exec_meta, top_k=k_per_query, filter=filter_meta)
         for hit in hits:
             merged = {**hit, "cue": cue}
+            doc_id = merged.get("meta", {}).get("doc_id")
+            if allowed and doc_id and doc_id.lower() not in allowed:
+                continue
             existing = aggregated.get(merged["id"])
             if existing is None or merged["score"] > existing["score"]:
                 aggregated[merged["id"]] = merged
@@ -138,9 +150,22 @@ def gather_trl_evidence(state: Dict[str, Any]) -> Dict[str, Any]:
     alpha = config.get("retrieval_alpha", 0.6)
     k_per_query = config.get("k_per_query", 6)
     max_snippets = config.get("max_snippets_per_metric", 3)
-
     max_chars = int(config.get("max_snippet_chars", 900))
-    snippets = _aggregate_hits(TRL_CUES, patents_collection, config, exec_meta, k_per_query)
+    allowed_docs = {meta.get("doc_id", "").lower() for meta in state.get("inputs", {}).get("metas", []) if meta.get("doc_id")}
+    if allowed_docs:
+        allowed_docs.add("swtrls")
+        allowed_iter = allowed_docs
+    else:
+        allowed_iter = None
+
+    snippets = _aggregate_hits(
+        TRL_CUES,
+        patents_collection,
+        config,
+        exec_meta,
+        k_per_query,
+        allowed_docs=allowed_iter,
+    )
     snippets = _normalize_snippets(snippets, max_snippets)
     level = _infer_trl_level(snippets)
     evidence_entries = _build_evidence_entries("trl", snippets, exec_meta, badge="Local RAG", max_chars=max_chars)
@@ -205,6 +230,12 @@ def gather_claims_evidence(state: Dict[str, Any]) -> Dict[str, Any]:
 
     exec_meta = state.setdefault("exec_meta", {})
     max_chars = int(config.get("max_snippet_chars", 900))
+    allowed_docs = {meta.get("doc_id", "").lower() for meta in state.get("inputs", {}).get("metas", []) if meta.get("doc_id")}
+    if allowed_docs:
+        allowed_docs.add("swtrls")
+        allowed_iter = allowed_docs
+    else:
+        allowed_iter = None
     snippets = _aggregate_hits(
         CLAIM_CUES,
         patents_collection,
@@ -212,6 +243,7 @@ def gather_claims_evidence(state: Dict[str, Any]) -> Dict[str, Any]:
         exec_meta,
         k_per_query,
         {"section": "claims"},
+        allowed_docs=allowed_iter,
     )
     snippets = _normalize_snippets(snippets, max_snippets)
     claim_entries = _build_evidence_entries("claims", snippets, exec_meta, badge="Local RAG", max_chars=max_chars)

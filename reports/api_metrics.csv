@@ -1,0 +1,11 @@
+metric,value,unit,year,source,source_id,url,status,chosen,error,cache_hit,cache_age_s,budget_used,retries
+CITATIONS_TOTAL,,count,2000,NBER Working Paper 7741,NBER-W7741,https://www.nber.org/papers/w7741,budget_exceeded,True,api_disabled,False,,0,0
+FAMILY_SIZE,,count,2024,WIPO IP Indicators,WIPO-2024,https://www.wipo.int/web-publications/world-intellectual-property-indicators-2024-highlights/en/patents-highlights.html,budget_exceeded,True,api_disabled,False,,0,0
+COUNTRIES,,countries,2024,WIPO IP Indicators,WIPO-2024,https://www.wipo.int/web-publications/world-intellectual-property-indicators-2024-highlights/en/patents-highlights.html,budget_exceeded,True,api_disabled,False,,0,0
+LITIGATION_FLAG,,boolean,2012,USPTO Official Gazette,USPTO-OG-2012-52,https://www.uspto.gov/web/offices/com/sol/og/2012/week52/TOCCN/item-80.htm,budget_exceeded,True,api_disabled,False,,0,0
+RENEWAL_STATUS,,status,2012,USPTO Maintenance Fee,USPTO-FEE,https://www.uspto.gov/web/offices/com/sol/og/2012/week52/TOCCN/item-80.htm,budget_exceeded,True,api_disabled,False,,0,0
+SEP_INDICATION,,boolean,2022,ETSI SEP List,ETSI-SR-000-314,https://www.etsi.org/deliver/etsi_sr/000300_000399/000314/02.32.01_60/sr_000314v023201p.pdf,budget_exceeded,True,api_disabled,False,,0,0
+HHI,,index,2024,DOJ / FTC Guidelines,DOJ-HHI,https://www.justice.gov/atr/herfindahl-hirschman-index,budget_exceeded,True,api_disabled,False,,0,0
+GENERALITY,,index,2001,NBER Working Paper 8498,NBER-W8498,https://www.nber.org/papers/w8498,budget_exceeded,True,api_disabled,False,,0,0
+ORIGINALITY,,index,2000,NBER Working Paper 7741,NBER-W7741,https://www.nber.org/papers/w7741,budget_exceeded,True,api_disabled,False,,0,0
+AGE_YEARS,,years,2025,Google Patents,GOOGLE-PATENTS,https://patents.google.com/patent/US20230012345,budget_exceeded,True,api_disabled,False,,0,0
