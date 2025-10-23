@@ -32,9 +32,35 @@ class EdgeAdapterAgent:
         Returns:
             Updated state with edge adapter scores and flags
         """
-        # Extract edge metrics from evidence
-        evidence = state.get("evidence", {})
-        edge_metrics = evidence.get("edge_performance", {})
+        exec_meta = state.setdefault("exec_meta", {})
+
+        # Extract edge metrics from state performance
+        performance = state.get("performance", {})
+        edge_metrics_raw = performance.get("metrics", {})
+
+        # Convert nested dict structure to flat values
+        edge_metrics = {}
+        for key, val in edge_metrics_raw.items():
+            if isinstance(val, dict):
+                edge_metrics[key] = val.get("value")
+            else:
+                edge_metrics[key] = val
+
+        # Priority 4: LLM inference if no metrics found
+        if not edge_metrics or all(v is None for v in edge_metrics.values()):
+            if self.config.get("llm", {}).get("use_tool_calling", False):
+                try:
+                    edge_metrics = self._llm_infer_performance(state)
+                    exec_meta.setdefault("logs", []).append("Edge: LLM inference used for performance estimation")
+                except Exception as e:
+                    exec_meta.setdefault("warnings", []).append(f"Edge LLM inference failed: {str(e)}")
+
+        # Priority 5: Mark as N/A if still no data
+        if not edge_metrics or all(v is None for v in edge_metrics.values()):
+            exec_meta.setdefault("logs", []).append("Edge: No performance data available (N/A)")
+            state["performance"]["status"] = "not_available"
+            state["performance"]["reason"] = "No benchmark data found in public sources"
+            return state
 
         # Evaluate against thresholds
         adapter_scores = {}
@@ -106,6 +132,89 @@ class EdgeAdapterAgent:
             return 60.0 + (delta + 2.0) * 10  # -5% = 30pts
         else:
             return max(0.0, 30.0 + (delta + 5.0) * 6)  # Steeper penalty
+
+    def _llm_infer_performance(self, state: Dict[str, Any]) -> Dict[str, float]:
+        """
+        Use LLM to infer edge performance metrics from patent description.
+
+        Returns:
+            Dictionary with inferred metrics (latency_ms, power_mw, memory_mb, accuracy_delta)
+        """
+        try:
+            import os
+            from openai import OpenAI
+        except ImportError:
+            return {}
+
+        api_key = os.getenv("OPENAI_API_KEY")
+        if not api_key:
+            return {}
+
+        # Get patent info
+        metas = state.get("inputs", {}).get("metas", [])
+        if not metas:
+            return {}
+
+        patent_meta = metas[0]
+        doc_id = patent_meta.get("doc_id", "")
+        title = patent_meta.get("title", "")
+        notes = patent_meta.get("notes", "")
+
+        # Get evidence snippets
+        evidence = state.get("evidence", {})
+        trl_snippets = evidence.get("trl", {}).get("snippets", [])
+        snippet_texts = [s.get("text", "")[:200] for s in trl_snippets[:2]]
+
+        prompt = f"""You are an edge AI performance expert. Based on the patent information below, estimate the edge device performance metrics.
+
+Patent: {doc_id}
+Title: {title}
+Notes: {notes}
+
+Evidence snippets:
+{chr(10).join(snippet_texts) if snippet_texts else "No technical details available"}
+
+Estimate the following metrics for edge device deployment:
+1. Inference latency (ms): Typical latency for one inference
+2. Power consumption (mW): Power draw during inference
+3. Memory footprint (MB): Model size in memory
+4. Accuracy delta (%): Accuracy change vs. baseline (negative = degradation)
+
+Provide realistic estimates based on typical edge AI implementations. If unsure, provide conservative estimates.
+
+Respond in JSON format:
+{{
+  "latency_ms": <number>,
+  "power_mw": <number>,
+  "memory_mb": <number>,
+  "accuracy_delta": <number>,
+  "confidence": <0.0-1.0>,
+  "reasoning": "<brief explanation>"
+}}
+"""
+
+        try:
+            client = OpenAI(api_key=api_key, timeout=30)
+            response = client.chat.completions.create(
+                model=self.config.get("llm", {}).get("model", "gpt-4o-mini"),
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0.3,
+                max_tokens=300,
+                response_format={"type": "json_object"}
+            )
+
+            import json
+            result = json.loads(response.choices[0].message.content)
+
+            return {
+                "latency_ms": result.get("latency_ms"),
+                "power_mw": result.get("power_mw"),
+                "memory_mb": result.get("memory_mb"),
+                "accuracy_delta": result.get("accuracy_delta")
+            }
+
+        except Exception:
+            return {}
 
 
 __all__ = ["EdgeAdapterAgent"]

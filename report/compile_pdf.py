@@ -7,6 +7,12 @@ from typing import Any, Dict, Iterable, List
 
 from retrieval.evidence_rag import CLAIM_CUES, TRL_CUES
 
+# Try Korean formatter first, fallback to English
+try:
+    from report.narrative_formatter_kr import format_main_body_section_kr as format_main_body_section
+except ImportError:
+    from report.narrative_formatter import format_main_body_section
+
 try:  # pragma: no cover - optional dependency
     from reportlab.lib.pagesizes import A4  # type: ignore
     from reportlab.pdfbase import pdfmetrics  # type: ignore
@@ -177,17 +183,17 @@ def _render_main_body(canvas_obj: Any, main_body: Dict[str, Any], *, font_regula
     canvas_obj.drawString(40, y, "MAIN BODY")
     y -= 24
     sections = [
-        ("1. Scope & Method", main_body.get("scope_method")),
-        ("2. Dataset Overview", main_body.get("dataset")),
-        ("3. Core Metrics", main_body.get("core_metrics")),
-        ("4. Edge Fitness", main_body.get("edge_fitness")),
-        ("5. Competitive & Standards", main_body.get("competitive")),
-        ("6. Risk Profile", main_body.get("risk_profile")),
-        ("7. Ranking & Labelling", main_body.get("ranking")),
-        ("8. Decision Cards", main_body.get("candidate_cards")),
-        ("9. Conclusion", main_body.get("conclusion")),
+        ("1. Scope & Method", "scope_method", main_body.get("scope_method")),
+        ("2. Dataset Overview", "dataset", main_body.get("dataset")),
+        ("3. Core Metrics", "core_metrics", main_body.get("core_metrics")),
+        ("4. Edge Fitness", "edge_fitness", main_body.get("edge_fitness")),
+        ("5. Competitive & Standards", "competitive", main_body.get("competitive")),
+        ("6. Risk Profile", "risk_profile", main_body.get("risk_profile")),
+        ("7. Ranking & Labelling", "ranking", main_body.get("ranking")),
+        ("8. Decision Cards", "candidate_cards", main_body.get("candidate_cards")),
+        ("9. Conclusion", "conclusion", main_body.get("conclusion")),
     ]
-    for title, payload in sections:
+    for title, section_key, payload in sections:
         if y < 160:
             canvas_obj.showPage()
             y = PAGE_HEIGHT - 60
@@ -195,25 +201,17 @@ def _render_main_body(canvas_obj: Any, main_body: Dict[str, Any], *, font_regula
         canvas_obj.drawString(45, y, title)
         y -= 16
         canvas_obj.setFont(font_regular, 11)
-        if isinstance(payload, dict):
-            for key, value in payload.items():
-                if value in (None, "", []):
-                    continue
-                if isinstance(value, list):
-                    text = f"- {key}: {', '.join(map(str, value))}"
-                else:
-                    text = f"- {key}: {value}"
-                y = _draw_wrapped(canvas_obj, text, x=55, y=y, width=88, font=font_regular, font_size=11)
-        elif isinstance(payload, list):
-            for item in payload:
-                if isinstance(item, dict):
-                    text = "; ".join(f"{k}={v}" for k, v in item.items() if v not in (None, ""))
-                else:
-                    text = str(item)
-                y = _draw_wrapped(canvas_obj, f"- {text}", x=55, y=y, width=88, font=font_regular, font_size=11)
-        elif payload:
-            y = _draw_wrapped(canvas_obj, f"- {payload}", x=55, y=y, width=88, font=font_regular, font_size=11)
-        y -= 6
+
+        # Convert to narrative format
+        narrative_lines = format_main_body_section(section_key, payload)
+
+        for line in narrative_lines:
+            if not line or line.strip() == "":
+                continue
+            y = _draw_wrapped(canvas_obj, line, x=55, y=y, width=88, font=font_regular, font_size=11)
+            y -= 4  # Small spacing between paragraphs
+
+        y -= 6  # Section spacing
     return y
 
 

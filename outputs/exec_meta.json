@@ -18,21 +18,24 @@
     "backend": "openai",
     "model": "text-embedding-3-small",
     "timeout_s": 30,
-    "snippets": 7,
-    "tokens_est": 342,
+    "snippets": 0,
+    "tokens_est": 0,
     "cap": 25000,
-    "embedded": 7,
-    "skipped": 0
+    "embedded": 0,
+    "skipped": 7
   },
   "openai_api_key_env": "OPENAI_API_KEY",
   "logs": [
     "WO2018097365A1: fallback parser used, claims=3",
     "SWTRLs: fallback parser used, claims=0",
-    "Ingestion completed: embedded=7, skipped=0",
-    "INGEST: embedded=7 skipped=0",
-    "API_EXPAND: calls=1 cached=0 batches=1 ok=5/10 missing=COUNTRIES,GENERALITY,HHI,LITIGATION_FLAG,ORIGINALITY reason=ok",
+    "Ingestion completed: embedded=0, skipped=12",
+    "INGEST: embedded=0 skipped=12",
+    "API_EXPAND: calls=0 cached=1 batches=0 ok=5/10 missing=COUNTRIES,GENERALITY,HHI,LITIGATION_FLAG,ORIGINALITY reason=ok",
+    "TRL: LLM tool calling used (confidence=0.70)",
     "TRL: evidence gathered",
+    "Claims: LLM tool calling used (confidence=0.70)",
     "CLAIMS: evidence gathered",
+    "Edge: User-provided metadata used",
     "JOIN: Tavily search returned 0 links",
     "JOIN: Generated LLM-based P-S-E summary",
     "JOIN: merged evidence/API metrics (priority=trl)",
@@ -40,11 +43,10 @@
     "SCORE: Evaluated edge suitability via EdgeAdapterAgent",
     "SCORE: Aggregated scores via AggregatorAgent",
     "SCORE: total=74.09 label=P",
-    "REPORT: generated at reports\\report_202510231347380971090900.pdf",
+    "REPORT: generated at reports\\report_202510231539146546780900.pdf",
     "Pipeline execution completed."
   ],
   "warnings": [
-    "LangGraph is not installed. Install langgraph to use the orchestrator.",
     "tavily-python package not installed."
   ],
   "plan": [
@@ -56,8 +58,9 @@
     "SCORE",
     "REPORT"
   ],
-  "ts": "2025-10-23T13:47:38.097109+09:00",
+  "ts": "2025-10-23T15:39:14.654678+09:00",
   "version": "v0",
+  "orchestrator": "langgraph",
   "fingerprints": {
     "WO2018097365A1": {
       "fingerprint": "bf00c88ba0fde57dcfe43606ee3d63b486dc20c9d6cf02de09c3d65e0e7b3e14",
@@ -83,22 +86,22 @@
         {
           "doc_id": "WO2018097365A1",
           "collection": "patents",
-          "count": 5,
-          "skipped": 0
+          "count": 0,
+          "skipped": 5
         },
         {
           "doc_id": "SWTRLs",
           "collection": "trl_ref",
-          "count": 2,
-          "skipped": 0
+          "count": 0,
+          "skipped": 7
         }
       ],
       "counts": {
-        "WO2018097365A1": 5,
-        "SWTRLs": 2
+        "WO2018097365A1": 0,
+        "SWTRLs": 0
       },
-      "embedded": 7,
-      "skipped": 0
+      "embedded": 0,
+      "skipped": 12
     }
   },
   "completed_nodes": [
@@ -115,26 +118,9 @@
     "REPORT"
   ],
   "api": {
-    "crawled_patents": [
-      {
-        "doc_id": "US20230012345",
-        "timestamp": "2025-10-23T13:47:39.638559",
-        "source": "google_patents"
-      }
-    ],
-    "crawled": true,
-    "crawler_source": "google_patents",
-    "calls": 1,
-    "batches": 1,
-    "last_fetch_ts": "2025-10-23T04:47:38.512152+00:00",
-    "missing_keys": [
-      "COUNTRIES",
-      "GENERALITY",
-      "HHI",
-      "LITIGATION_FLAG",
-      "ORIGINALITY"
-    ],
-    "cached": 0,
+    "cached": 1,
+    "calls": 0,
+    "batches": 0,
     "collected_keys": [
       "AGE_YEARS",
       "CITATIONS_TOTAL",
@@ -146,6 +132,13 @@
       "ORIGINALITY",
       "RENEWAL_STATUS",
       "SEP_INDICATION"
+    ],
+    "missing_keys": [
+      "COUNTRIES",
+      "GENERALITY",
+      "HHI",
+      "LITIGATION_FLAG",
+      "ORIGINALITY"
     ],
     "ok_count": 5
   },
@@ -183,7 +176,8 @@
           "source_url": "https://www.nber.org/papers/w7741",
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
-            "hit": false
+            "hit": true,
+            "age_s": 6696.539103
           },
           "budget_used": 1,
           "retries": 1,
@@ -202,7 +196,8 @@
           "source_url": "https://patents.google.com/patent/US20230012345",
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
-            "hit": false
+            "hit": true,
+            "age_s": 6696.539103
           },
           "budget_used": 1,
           "retries": 1,
@@ -221,7 +216,8 @@
           "source_url": "https://www.wipo.int/web-publications/world-intellectual-property-indicators-2024-highlights/en/patents-highlights.html",
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
-            "hit": false
+            "hit": true,
+            "age_s": 6696.539103
           },
           "budget_used": 1,
           "retries": 1,
@@ -240,7 +236,8 @@
           "source_url": "https://www.wipo.int/web-publications/world-intellectual-property-indicators-2024-highlights/en/patents-highlights.html",
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
-            "hit": false
+            "hit": true,
+            "age_s": 6696.539103
           },
           "budget_used": 1,
           "retries": 1,
@@ -259,7 +256,8 @@
           "source_url": "https://www.uspto.gov/web/offices/com/sol/og/2012/week52/TOCCN/item-80.htm",
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
-            "hit": false
+            "hit": true,
+            "age_s": 6696.539103
           },
           "budget_used": 1,
           "retries": 1,
@@ -278,7 +276,8 @@
           "source_url": "https://www.wipo.int/en/web/wipo-magazine/articles/ip-and-business-launching-a-new-product-freedom-to-operate-34956",
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
-            "hit": false
+            "hit": true,
+            "age_s": 6696.539103
           },
           "budget_used": 1,
           "retries": 1,
@@ -297,7 +296,8 @@
           "source_url": "https://www.uspto.gov/web/offices/com/sol/og/2012/week52/TOCCN/item-80.htm",
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
-            "hit": false
+            "hit": true,
+            "age_s": 6696.539103
           },
           "budget_used": 1,
           "retries": 1,
@@ -316,7 +316,8 @@
           "source_url": "https://www.etsi.org/deliver/etsi_sr/000300_000399/000314/02.32.01_60/sr_000314v023201p.pdf",
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
-            "hit": false
+            "hit": true,
+            "age_s": 6696.539103
           },
           "budget_used": 1,
           "retries": 1,
@@ -335,7 +336,8 @@
           "source_url": "https://www.justice.gov/atr/herfindahl-hirschman-index",
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
-            "hit": false
+            "hit": true,
+            "age_s": 6696.539103
           },
           "budget_used": 1,
           "retries": 1,
@@ -354,7 +356,8 @@
           "source_url": "https://www.nber.org/papers/w8498",
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
-            "hit": false
+            "hit": true,
+            "age_s": 6696.539103
           },
           "budget_used": 1,
           "retries": 1,
@@ -373,7 +376,8 @@
           "source_url": "https://www.nber.org/papers/w7741",
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
-            "hit": false
+            "hit": true,
+            "age_s": 6696.539103
           },
           "budget_used": 1,
           "retries": 1,
@@ -392,7 +396,8 @@
           "source_url": "https://patents.google.com/patent/US20230012345",
           "fetch_ts": "2025-10-23T04:47:38.512152+00:00",
           "cache_info": {
-            "hit": false
+            "hit": true,
+            "age_s": 6696.539103
           },
           "budget_used": 1,
           "retries": 1,
@@ -408,7 +413,32 @@
         "LITIGATION_FLAG",
         "ORIGINALITY"
       ],
-      "performance": {},
+      "performance": {
+        "latency_ms": {
+          "value": 35,
+          "unit": "ms",
+          "source": "User-provided benchmark data",
+          "priority": 1
+        },
+        "power_mw": {
+          "value": 450,
+          "unit": "mW",
+          "source": "User-provided benchmark data",
+          "priority": 1
+        },
+        "memory_mb": {
+          "value": 128,
+          "unit": "MB",
+          "source": "User-provided benchmark data",
+          "priority": 1
+        },
+        "accuracy_delta": {
+          "value": -1.2,
+          "unit": "%",
+          "source": "User-provided benchmark data",
+          "priority": 1
+        }
+      },
       "tavily_links": []
     }
   },
@@ -433,6 +463,6 @@
   },
   "report": {
     "completed": true,
-    "path": "reports\\report_202510231347380971090900.pdf"
+    "path": "reports\\report_202510231539146546780900.pdf"
   }
 }

@@ -167,7 +167,24 @@ def gather_trl_evidence(state: Dict[str, Any]) -> Dict[str, Any]:
         allowed_docs=allowed_iter,
     )
     snippets = _normalize_snippets(snippets, max_snippets)
-    level = _infer_trl_level(snippets)
+
+    # Get keyword-based TRL estimate
+    keyword_level = _infer_trl_level(snippets)
+
+    # Try LLM Tool Calling for enhanced evaluation
+    trl_eval = {"trl_level": keyword_level, "source": "keyword_matching"}
+    if config.get("llm", {}).get("use_tool_calling", False):
+        try:
+            from llm.tool_calling import evaluate_trl_with_llm
+            trl_eval = evaluate_trl_with_llm(snippets, keyword_level, config)
+            exec_meta.setdefault("logs", []).append(
+                f"TRL: LLM tool calling used (confidence={trl_eval.get('confidence', 0):.2f})"
+            )
+        except Exception as e:
+            exec_meta.setdefault("warnings", []).append(f"TRL tool calling failed: {str(e)}")
+            trl_eval = {"trl_level": keyword_level, "source": "keyword_matching_fallback"}
+
+    level = trl_eval.get("trl_level")
     evidence_entries = _build_evidence_entries("trl", snippets, exec_meta, badge="Local RAG", max_chars=max_chars)
 
     ref_snippets: List[Dict[str, Any]] = []
@@ -191,6 +208,11 @@ def gather_trl_evidence(state: Dict[str, Any]) -> Dict[str, Any]:
             "snippets": evidence_entries,
             "ref_snippets": ref_entries,
             "source_badge": "Local RAG",
+            "evaluation_method": trl_eval.get("source", "keyword_matching"),
+            "confidence": trl_eval.get("confidence"),
+            "reasoning": trl_eval.get("reasoning"),
+            "key_indicators": trl_eval.get("key_indicators", []),
+            "fallback_score": trl_eval.get("fallback_score"),
         }
     )
 
@@ -266,6 +288,24 @@ def gather_claims_evidence(state: Dict[str, Any]) -> Dict[str, Any]:
     )
     pattern_stats = _summarize_claim_patterns(claim_records)
 
+    # Try LLM Tool Calling for claim quality evaluation
+    from scoring.scoring import compute_claim_score
+    baseline_score = compute_claim_score(num_independent, avg_len_tokens)
+
+    claim_eval = {"quality_score": baseline_score, "source": "formula"}
+    if config.get("llm", {}).get("use_tool_calling", False) and num_independent > 0:
+        try:
+            from llm.tool_calling import evaluate_claims_with_llm
+            claim_eval = evaluate_claims_with_llm(
+                num_independent, avg_len_tokens, snippets, baseline_score, config
+            )
+            exec_meta.setdefault("logs", []).append(
+                f"Claims: LLM tool calling used (confidence={claim_eval.get('confidence', 0):.2f})"
+            )
+        except Exception as e:
+            exec_meta.setdefault("warnings", []).append(f"Claims tool calling failed: {str(e)}")
+            claim_eval = {"quality_score": baseline_score, "source": "formula_fallback"}
+
     state.setdefault("evidence", {}).setdefault("claims", {}).update(
         {
             "num_independent": num_independent,
@@ -273,6 +313,14 @@ def gather_claims_evidence(state: Dict[str, Any]) -> Dict[str, Any]:
             "pattern_stats": pattern_stats,
             "snippets": claim_entries,
             "source_badge": "Local RAG",
+            "evaluation_method": claim_eval.get("source", "formula"),
+            "quality_score": claim_eval.get("quality_score"),
+            "breadth_assessment": claim_eval.get("breadth_assessment"),
+            "confidence": claim_eval.get("confidence"),
+            "reasoning": claim_eval.get("reasoning"),
+            "strengths": claim_eval.get("strengths", []),
+            "weaknesses": claim_eval.get("weaknesses", []),
+            "fallback_score": claim_eval.get("fallback_score"),
         }
     )
 

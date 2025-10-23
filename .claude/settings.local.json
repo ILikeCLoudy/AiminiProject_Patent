@@ -3,7 +3,8 @@
     "allow": [
       "Bash(find:*)",
       "Bash(timeout 180 python app.py:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(python app.py:*)"
     ],
     "deny": [],
     "ask": []

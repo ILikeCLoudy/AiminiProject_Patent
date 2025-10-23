@@ -67,7 +67,8 @@
     "model": "gpt-4o-mini",
     "temperature": 0.3,
     "max_tokens": 500,
-    "timeout_s": 30
+    "timeout_s": 30,
+    "use_tool_calling": true
   },
 
   "tavily": {

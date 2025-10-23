@@ -180,6 +180,8 @@ pyrightconfig.json
 *.sqlite
 
 # 하단은 혹시 경로지정 미스의 경우 참조할 것
+.chroma/
+.chroma/*.
 ./chroma/ 
 ./chroma.db/
 ./chroma_data/
