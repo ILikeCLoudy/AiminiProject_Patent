@@ -28,7 +28,15 @@
 
   "api": {
     "enabled": true,
-    "use_fixed_values": true,
+    "use_fixed_values": false,
+    "crawler": {
+      "enabled": true,
+      "source": "google_patents",
+      "rate_limit_seconds": 1.5,
+      "timeout_seconds": 10,
+      "retry_attempts": 3
+    },
+    "cache_ttl_days": 90,
     "fixed_metrics": {
       "CITATIONS_TOTAL": {"value": 12, "unit": "count", "year": 2023},
       "FAMILY_SIZE": {"value": 4, "unit": "count", "year": 2023},
@@ -45,7 +53,7 @@
     "max_calls_per_run": 200,
     "batch_size": 20,
     "retry": {"max_attempts": 3, "backoff_s": 2},
-    "whitelist_domains": ["uspto.gov", "epo.org", "wipo.int", "etsi.org"]
+    "whitelist_domains": ["uspto.gov", "epo.org", "wipo.int", "etsi.org", "patents.google.com"]
   },
 
   "catalog": {
@@ -55,13 +63,20 @@
     "top_k": 2
   },
 
+  "llm": {
+    "model": "gpt-4o-mini",
+    "temperature": 0.3,
+    "max_tokens": 500,
+    "timeout_s": 30
+  },
+
   "tavily": {
-    "enabled": false,
+    "enabled": true,
     "api_key_env": "TAVILY_API_KEY",
     "max_queries_per_run": 5,
     "timeout_s": 20,
     "cache_ttl_days": 30,
-    "whitelist_domains": ["etsi.org", "uspto.gov", "wipo.int", "epo.org"],
+    "whitelist_domains": ["etsi.org", "uspto.gov", "wipo.int", "epo.org", "3gpp.org", "ieee.org"],
     "snapshot_dir": "data/snapshots",
     "max_snapshots": 3
   },

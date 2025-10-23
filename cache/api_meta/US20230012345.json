@@ -1,0 +1,233 @@
+{
+  "timestamp": "2025-10-23T04:27:04.879452+00:00",
+  "records": [
+    {
+      "metric_key": "CITATIONS_TOTAL",
+      "value": null,
+      "unit": "count",
+      "year": 2000,
+      "source_name": "NBER Working Paper 7741",
+      "source_type": "API",
+      "source_id": "NBER-W7741",
+      "source_url": "https://www.nber.org/papers/w7741",
+      "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+      "cache_info": {
+        "hit": false
+      },
+      "budget_used": 1,
+      "retries": 1,
+      "status": "blocked_domain",
+      "error": "domain_not_whitelisted",
+      "chosen": false
+    },
+    {
+      "metric_key": "CITATIONS_TOTAL",
+      "value": 0,
+      "unit": "count",
+      "year": 2025,
+      "source_name": "Google Patents",
+      "source_type": "API",
+      "source_id": "GOOGLE-PATENTS",
+      "source_url": "https://patents.google.com/patent/US20230012345",
+      "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+      "cache_info": {
+        "hit": false
+      },
+      "budget_used": 1,
+      "retries": 1,
+      "status": "ok",
+      "error": null,
+      "chosen": true
+    },
+    {
+      "metric_key": "FAMILY_SIZE",
+      "value": 1,
+      "unit": "count",
+      "year": 2024,
+      "source_name": "WIPO IP Indicators",
+      "source_type": "API",
+      "source_id": "WIPO-2024",
+      "source_url": "https://www.wipo.int/web-publications/world-intellectual-property-indicators-2024-highlights/en/patents-highlights.html",
+      "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+      "cache_info": {
+        "hit": false
+      },
+      "budget_used": 1,
+      "retries": 1,
+      "status": "ok",
+      "error": null,
+      "chosen": true
+    },
+    {
+      "metric_key": "COUNTRIES",
+      "value": [],
+      "unit": "countries",
+      "year": 2024,
+      "source_name": "WIPO IP Indicators",
+      "source_type": "API",
+      "source_id": "WIPO-2024",
+      "source_url": "https://www.wipo.int/web-publications/world-intellectual-property-indicators-2024-highlights/en/patents-highlights.html",
+      "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+      "cache_info": {
+        "hit": false
+      },
+      "budget_used": 1,
+      "retries": 1,
+      "status": "missing",
+      "error": "no_adapter_result",
+      "chosen": true
+    },
+    {
+      "metric_key": "LITIGATION_FLAG",
+      "value": null,
+      "unit": "boolean",
+      "year": 2012,
+      "source_name": "USPTO Official Gazette",
+      "source_type": "API",
+      "source_id": "USPTO-OG-2012-52",
+      "source_url": "https://www.uspto.gov/web/offices/com/sol/og/2012/week52/TOCCN/item-80.htm",
+      "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+      "cache_info": {
+        "hit": false
+      },
+      "budget_used": 1,
+      "retries": 1,
+      "status": "missing",
+      "error": "no_adapter_result",
+      "chosen": true
+    },
+    {
+      "metric_key": "LITIGATION_FLAG",
+      "value": null,
+      "unit": "boolean",
+      "year": 2005,
+      "source_name": "WIPO Magazine - Freedom to Operate",
+      "source_type": "API",
+      "source_id": "WIPO-FTO-ARTICLE",
+      "source_url": "https://www.wipo.int/en/web/wipo-magazine/articles/ip-and-business-launching-a-new-product-freedom-to-operate-34956",
+      "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+      "cache_info": {
+        "hit": false
+      },
+      "budget_used": 1,
+      "retries": 1,
+      "status": "missing",
+      "error": "no_adapter_result",
+      "chosen": false
+    },
+    {
+      "metric_key": "RENEWAL_STATUS",
+      "value": "active",
+      "unit": "status",
+      "year": 2012,
+      "source_name": "USPTO Maintenance Fee",
+      "source_type": "API",
+      "source_id": "USPTO-FEE",
+      "source_url": "https://www.uspto.gov/web/offices/com/sol/og/2012/week52/TOCCN/item-80.htm",
+      "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+      "cache_info": {
+        "hit": false
+      },
+      "budget_used": 1,
+      "retries": 1,
+      "status": "ok",
+      "error": null,
+      "chosen": true
+    },
+    {
+      "metric_key": "SEP_INDICATION",
+      "value": "declared",
+      "unit": "boolean",
+      "year": 2022,
+      "source_name": "ETSI SEP List",
+      "source_type": "API",
+      "source_id": "ETSI-SR-000-314",
+      "source_url": "https://www.etsi.org/deliver/etsi_sr/000300_000399/000314/02.32.01_60/sr_000314v023201p.pdf",
+      "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+      "cache_info": {
+        "hit": false
+      },
+      "budget_used": 1,
+      "retries": 1,
+      "status": "ok",
+      "error": null,
+      "chosen": true
+    },
+    {
+      "metric_key": "HHI",
+      "value": null,
+      "unit": "index",
+      "year": 2024,
+      "source_name": "DOJ / FTC Guidelines",
+      "source_type": "API",
+      "source_id": "DOJ-HHI",
+      "source_url": "https://www.justice.gov/atr/herfindahl-hirschman-index",
+      "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+      "cache_info": {
+        "hit": false
+      },
+      "budget_used": 1,
+      "retries": 1,
+      "status": "blocked_domain",
+      "error": "domain_not_whitelisted",
+      "chosen": true
+    },
+    {
+      "metric_key": "GENERALITY",
+      "value": null,
+      "unit": "index",
+      "year": 2001,
+      "source_name": "NBER Working Paper 8498",
+      "source_type": "API",
+      "source_id": "NBER-W8498",
+      "source_url": "https://www.nber.org/papers/w8498",
+      "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+      "cache_info": {
+        "hit": false
+      },
+      "budget_used": 1,
+      "retries": 1,
+      "status": "blocked_domain",
+      "error": "domain_not_whitelisted",
+      "chosen": true
+    },
+    {
+      "metric_key": "ORIGINALITY",
+      "value": null,
+      "unit": "index",
+      "year": 2000,
+      "source_name": "NBER Working Paper 7741",
+      "source_type": "API",
+      "source_id": "NBER-W7741",
+      "source_url": "https://www.nber.org/papers/w7741",
+      "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+      "cache_info": {
+        "hit": false
+      },
+      "budget_used": 1,
+      "retries": 1,
+      "status": "blocked_domain",
+      "error": "domain_not_whitelisted",
+      "chosen": true
+    },
+    {
+      "metric_key": "AGE_YEARS",
+      "value": 2.61,
+      "unit": "years",
+      "year": 2025,
+      "source_name": "Google Patents",
+      "source_type": "API",
+      "source_id": "GOOGLE-PATENTS",
+      "source_url": "https://patents.google.com/patent/US20230012345",
+      "fetch_ts": "2025-10-23T04:27:04.879452+00:00",
+      "cache_info": {
+        "hit": false
+      },
+      "budget_used": 1,
+      "retries": 1,
+      "status": "ok",
+      "error": null,
+      "chosen": true
+    }
+  ]
+}

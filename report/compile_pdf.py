@@ -31,13 +31,24 @@ else:
 def _register_font() -> str:
     if canvas is None:
         return DEFAULT_FONT
-    font_path = Path("fonts") / "NotoSansCJK-Regular.ttc"
-    if font_path.exists():
-        try:
-            pdfmetrics.registerFont(TTFont("NotoSansCJK", str(font_path)))
-            return "NotoSansCJK"
-        except Exception:  # pragma: no cover - font registration failure
-            return DEFAULT_FONT
+
+    # Try TTF Variable Font first (best compatibility)
+    font_candidates = [
+        Path("fonts") / "NotoSerifCJKkr-VF.ttf",
+        Path("fonts") / "NotoSerifKR-VF.ttf",
+        Path("fonts") / "NotoSansCJK-Regular.ttc",
+        Path("fonts") / "OTF" / "Korean" / "NotoSerifCJKkr-Regular.otf",
+    ]
+
+    for font_path in font_candidates:
+        if font_path.exists():
+            try:
+                pdfmetrics.registerFont(TTFont("NotoSansCJK", str(font_path)))
+                return "NotoSansCJK"
+            except Exception:  # pragma: no cover - font registration failure
+                # Skip to next candidate
+                continue
+
     return DEFAULT_FONT
 
 

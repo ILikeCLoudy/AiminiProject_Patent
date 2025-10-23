@@ -1,12 +1,12 @@
 field,value
-conclusion,Label X: TRL 85.0 / Claim 85.0
+conclusion,Label P: TRL 85.0 / Claim 85.0
 reasons,TRL readiness score 85.0 | Claim breadth score 85.0
 purpose,Edge AI 특허 기술성·시장성 평가
-scope_keywords,
-scope_cpc,
-scope_period,N/A ~ N/A
+scope_keywords,"on-device, edge ai, federated learning, quantization"
+scope_cpc,"G06N, G06F"
+scope_period,2022-01-01 ~ 2025-12-31
 scope_target_market,trl
 documents,2
-family_size,
+family_size,1
 country_count,0
-label,X
+label,P

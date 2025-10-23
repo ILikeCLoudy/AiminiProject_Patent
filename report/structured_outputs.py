@@ -20,21 +20,28 @@ def _normalise_api_row(row: Dict[str, Any]) -> Dict[str, Any]:
     value = row.get("value")
     if isinstance(value, (list, dict)):
         value = json.dumps(value, ensure_ascii=False)
+    elif value is not None:
+        value = str(value)
+
+    year = row.get("year")
+    if year is not None:
+        year = int(year)
+
     return {
-        "metric": row.get("metric_key"),
-        "value": value,
-        "unit": row.get("unit"),
-        "year": row.get("year"),
-        "source": row.get("source_name"),
-        "source_id": row.get("source_id"),
-        "url": row.get("source_url"),
-        "status": row.get("status"),
+        "metric": row.get("metric_key") or "",
+        "value": value or "",
+        "unit": row.get("unit") or "",
+        "year": year,
+        "source": row.get("source_name") or "",
+        "source_id": row.get("source_id") or "",
+        "url": row.get("source_url") or "",
+        "status": row.get("status") or "",
         "chosen": bool(row.get("chosen")),
-        "error": row.get("error"),
+        "error": row.get("error") or "",
         "cache_hit": bool(cache_info.get("hit")),
         "cache_age_s": cache_info.get("age_s"),
-        "budget_used": row.get("budget_used"),
-        "retries": row.get("retries"),
+        "budget_used": row.get("budget_used") or 0,
+        "retries": row.get("retries") or 0,
     }
 
 

@@ -117,18 +117,55 @@ def _join_node(state: Dict[str, Any]) -> Dict[str, Any]:
         _log(exec_meta, "JOIN: already completed, skipping duplicate invocation")
         return state
 
+    config = state.get("config", {})
     evidence = state.get("evidence", {})
     api_rows = state.get("api", {}).get("rows", [])
     performance_metrics = extract_edge_performance(state)
+
+    # Tavily integration for SEP/standard evidence
+    tavily_results = []
+    if config.get("tavily", {}).get("enabled", False):
+        try:
+            from adapters.link_finder_tavily import search_official_links
+
+            # Search for SEP declarations if indicated
+            sep_declared = any(
+                row.get("metric_key") == "SEP_INDICATION"
+                and row.get("value") in ("declared", True)
+                for row in api_rows
+            )
+
+            if sep_declared:
+                doc_id = state.get("inputs", {}).get("metas", [{}])[0].get("doc_id", "unknown")
+                query = f"{doc_id} SEP declaration ETSI 3GPP"
+                tavily_results = search_official_links(config, exec_meta, query)
+                _log(exec_meta, f"JOIN: Tavily search returned {len(tavily_results)} links")
+        except Exception as e:
+            _log(exec_meta, f"JOIN: Tavily search failed: {str(e)}")
+
     aggregates = {
         "trl_snippets": len(evidence.get("trl", {}).get("snippets", [])),
         "claims_snippets": len(evidence.get("claims", {}).get("snippets", [])),
         "api_rows": api_rows,
         "api_missing": state.get("api_missing_flags", []),
         "performance": performance_metrics,
+        "tavily_links": tavily_results,
     }
     state.setdefault("aggregates", {})["join"] = aggregates
-    state.setdefault("synthesis", {})["ps_e_summary"] = generate_ps_e_summary(state)
+
+    # Use Summarizer Agent for LLM-based summary
+    try:
+        from agents.summarizer_agent import SummarizerAgent
+        agent = SummarizerAgent(config)
+        state = agent.run(state)
+        ps_e_summary = state.get("summaries", {}).get("pse", "")
+        _log(exec_meta, "JOIN: Generated LLM-based P-S-E summary")
+    except Exception as e:
+        # Fallback to template-based summary
+        ps_e_summary = generate_ps_e_summary(state)
+        _log(exec_meta, f"JOIN: LLM summary failed, using template: {str(e)}")
+
+    state.setdefault("synthesis", {})["ps_e_summary"] = ps_e_summary
     api_metrics_entry = state.setdefault("evidence", {}).setdefault("api_metrics", {})
     api_metrics_entry["rows"] = api_rows
     api_metrics_entry["missing"] = state.get("api_missing_flags", [])
@@ -147,13 +184,35 @@ def _score_node(state: Dict[str, Any]) -> Dict[str, Any]:
         _log(exec_meta, "SCORE: already completed, skipping duplicate invocation")
         return state
 
+    config = state.get("config", {})
     scores = state.setdefault("scores", {})
+
+    # Compute claim score (existing logic)
     claims_ev = state.get("evidence", {}).get("claims", {})
     if claims_ev:
         num_independent = int(claims_ev.get("num_independent") or 0)
         avg_len_tokens = float(claims_ev.get("avg_len_tokens") or 0.0)
         scores["claim"] = compute_claim_score(num_independent, avg_len_tokens)
 
+    # Core Scoring Agent - apply normalization
+    try:
+        from agents.core_scoring_agent import CoreScoringAgent
+        agent = CoreScoringAgent(config)
+        state = agent.run(state)
+        _log(exec_meta, "SCORE: Applied normalization via CoreScoringAgent")
+    except Exception as e:
+        _log(exec_meta, f"SCORE: CoreScoringAgent failed: {str(e)}")
+
+    # Edge Adapter Agent - evaluate edge suitability
+    try:
+        from agents.edge_adapter_agent import EdgeAdapterAgent
+        agent = EdgeAdapterAgent(config)
+        state = agent.run(state)
+        _log(exec_meta, "SCORE: Evaluated edge suitability via EdgeAdapterAgent")
+    except Exception as e:
+        _log(exec_meta, f"SCORE: EdgeAdapterAgent failed: {str(e)}")
+
+    # Legacy flag logic (keep for compatibility)
     api_rows = state.get("api", {}).get("rows", []) or []
     chosen_api = {row["metric_key"]: row for row in api_rows if row.get("chosen")}
 
@@ -166,11 +225,28 @@ def _score_node(state: Dict[str, Any]) -> Dict[str, Any]:
     if not sep_row or sep_row.get("status") != "ok":
         scores["std"] = min(scores.get("std", 30.0), 45.0)
 
-    total_score, weight_details = weighted_total(scores, WEIGHTS, return_details=True)
-    label = decide_label(total_score, flags)
+    # Merge flags from Edge Adapter
+    decision_flags = state.get("decision", {}).get("flags", [])
+    flags.extend(decision_flags)
+
+    # Aggregator Agent - compute total and assign label
+    try:
+        from agents.aggregator_agent import AggregatorAgent
+        agent = AggregatorAgent(config)
+        state = agent.run(state)
+        total_score = state.get("decision", {}).get("total", 0.0)
+        label = state.get("decision", {}).get("label", "X")
+        weight_details = state.get("decision", {}).get("score_details", {})
+        _log(exec_meta, "SCORE: Aggregated scores via AggregatorAgent")
+    except Exception as e:
+        # Fallback to legacy scoring
+        total_score, weight_details = weighted_total(scores, WEIGHTS, return_details=True)
+        label = decide_label(total_score, flags)
+        decision = state.setdefault("decision", {})
+        decision.update({"total": total_score, "label": label, "flags": flags})
+        _log(exec_meta, f"SCORE: AggregatorAgent failed, using legacy: {str(e)}")
 
     decision = state.setdefault("decision", {})
-    decision.update({"total": total_score, "label": label, "flags": flags})
     decision["weights_meta"] = weight_details
     decision["weights_redistributed"] = weight_details.get("redistributed", False)
 

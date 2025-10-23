@@ -107,6 +107,15 @@ def initialise_state(config: Dict[str, Any], metas: List[Dict[str, Any]], pdfs: 
             "openai_model": openai_model,
             "openai_timeout_s": openai_timeout,
             "openai_api_key_env": openai_api_env,
+            # Include all other config sections for agents to access
+            "api": config.get("api", {}),
+            "llm": config.get("llm", {}),
+            "tavily": config.get("tavily", {}),
+            "keywords": config.get("keywords", []),
+            "cpc": config.get("cpc", []),
+            "period": config.get("period", {}),
+            "edge_thresholds": config.get("edge_thresholds", {}),
+            "planner_llm": config.get("planner_llm", "gpt-4o-mini"),
         },
         "inputs": {"pdfs": pdfs, "metas": metas},
         "index": {},
@@ -185,7 +194,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run edge AI patent analysis pipeline.")
     parser.add_argument("--pdfs", nargs="+", help="List of PDF paths (patent + reference).")
     parser.add_argument("--metas", nargs="+", help="List of YAML metadata files.")
-    parser.add_argument("--config", required=True, help="JSON configuration file.")
+    parser.add_argument("--config", default="configs/user_config.sample.json", help="JSON configuration file (default: configs/user_config.sample.json).")
     parser.add_argument("--query", help="Natural language query for patent search and routing.")
     parser.add_argument("--topk", type=int, help="Number of top candidates to evaluate when using --query.")
     return parser.parse_args()
@@ -199,6 +208,11 @@ def main() -> None:
 
     config = json.loads(config_path.read_text(encoding="utf-8"))
     results: List[Dict[str, Any]] = []
+
+    # Default query mode: use catalog if no pdfs/metas specified
+    if not args.pdfs and not args.metas and not args.query:
+        args.query = "edge AI on-device inference"
+        print(f"No arguments provided. Using default query mode: '{args.query}'")
 
     if args.query:
         from routing.router import select_candidates

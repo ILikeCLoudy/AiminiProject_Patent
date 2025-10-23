@@ -5,7 +5,7 @@ import json
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Tuple
+from typing import Any, Dict, Iterable, List, Tuple, Optional
 
 
 class ApiBudgetExceeded(RuntimeError):
@@ -230,7 +230,13 @@ def _compute_base_metrics(meta: Dict[str, Any], exec_meta: Dict[str, Any]) -> Di
                 pub_dt = None
         if pub_dt:
             ts_value = exec_meta.get("ts")
-            now = datetime.fromisoformat(ts_value) if isinstance(ts_value, str) else datetime.now()
+            if isinstance(ts_value, str):
+                now = datetime.fromisoformat(ts_value).replace(tzinfo=None)
+            else:
+                now = datetime.now()
+            # Ensure pub_dt is timezone-naive
+            if pub_dt.tzinfo is not None:
+                pub_dt = pub_dt.replace(tzinfo=None)
             age_years = max((now - pub_dt).days / 365.25, 0.0)
 
     family_size = int(meta.get("family_size") or 0)
@@ -433,7 +439,29 @@ def collect_api_metrics(
     if used_calls >= max_calls:
         raise ApiBudgetExceeded(f"API call budget exhausted: limit={max_calls}")
 
+    # Try crawling first if enabled
+    crawled_metrics: Optional[Dict[str, Any]] = None
+    if api_config.get("crawler", {}).get("enabled", True):
+        try:
+            from adapters.google_patents_crawler import crawl_google_patents
+
+            crawl_result = crawl_google_patents(doc_id, api_config, exec_meta)
+            if crawl_result.get("success"):
+                crawled_metrics = crawl_result.get("metrics", {})
+                api_meta["crawled"] = True
+                api_meta["crawler_source"] = crawl_result.get("source")
+        except Exception as crawl_error:
+            api_meta["crawler_error"] = str(crawl_error)
+            crawled_metrics = None
+
+    # Merge crawled metrics with base metrics from YAML
     base_metrics = _compute_base_metrics(meta, exec_meta)
+    if crawled_metrics:
+        # Prefer crawled metrics over YAML when available
+        for key, value in crawled_metrics.items():
+            if value is not None:
+                base_metrics[key] = value
+
     fetch_ts = now.isoformat()
     records: List[Dict[str, Any]] = []
     missing_metrics: List[str] = []

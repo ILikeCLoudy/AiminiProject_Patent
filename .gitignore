@@ -184,5 +184,14 @@ pyrightconfig.json
 ./chroma.db/
 ./chroma_data/
 
+# cluade ignore
+.cluade/.
+.cluade/settings.local.json
+.cluade/settings.json
+
+# font
+.fonts/.
+.fonts/*.otf
+.fonts/*.ttf
 # End of https://www.toptal.com/developers/gitignore/api/python
 outputs/ranking.json
